@@ -4,6 +4,7 @@ adverto-cms
 A Symfony project created on April 20, 2017, 11:08 am.
 
 ** Project currently requires redis-server to be installed **
+
 ** Composer is required for package management https://getcomposer.org/ **
 
 Clone project into directory
