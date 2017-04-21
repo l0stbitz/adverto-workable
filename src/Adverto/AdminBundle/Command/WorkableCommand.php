@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  */
@@ -16,19 +17,17 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Josh Murphy
  *
  */
-class WorkableCommand extends ContainerAwareCommand
-{
+class WorkableCommand extends ContainerAwareCommand {
 
     /**
      * {@inheritdoc}
      */
-    protected function configure()
-    {
+    protected function configure() {
         $this
-            ->setName('adverto:workable')
-            ->setDescription('')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry Run')
-            ->setHelp('TODO: Fill this in');
+                ->setName('adverto:workable')
+                ->setDescription('')
+                ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry Run')
+                ->setHelp('TODO: Fill this in');
     }
 
     /**
@@ -36,11 +35,10 @@ class WorkableCommand extends ContainerAwareCommand
      * @param InputInterface $input
      * @param OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $this->input            = $input;
-        $this->output           = $output;
-        $this->dryRun           = $this->input->getOption('dry-run');
+    protected function execute(InputInterface $input, OutputInterface $output) {
+        $this->input = $input;
+        $this->output = $output;
+        $this->dryRun = $this->input->getOption('dry-run');
         $this->acquireWorkableFeed();
     }
 
@@ -48,18 +46,22 @@ class WorkableCommand extends ContainerAwareCommand
      * 
      * @return boolean
      */
-    protected function acquireWorkableFeed()
-    {
-        $job = $this->getContainer()->get('admin.workable_service')->getJobFromRedis('97C65C4C47');
-        print_r($job);
+    protected function acquireWorkableFeed() {
+        $key = 'adverto:jobs:*';
+        $res = $this->getContainer()->get('admin.redis_service')->getAll($key);
+            print_r($res);exit;
+        //$job = $this->getContainer()->get('admin.workable_service')->getJobFromRedis('97C65C4C47');
+        //print_r($job);
         //$this->getContainer()->get('admin.workable_service')->getAccounts();
-        //$this->getContainer()->get('admin.workable_service')->getStages();
+        //$this->getContainer()->get('admin.workable_service')->getStages();     
         $jobs = $this->getContainer()->get('admin.workable_service')->getJobsFromRedis();
-        print_r($jobs);
-        $candidates = $this->getContainer()->get('admin.workable_service')->getCandidatesFromRedis();
-        print_r($candidates);
-        
+        //print_r($jobs);
+        foreach ($jobs as $job) {
+            $res = $this->getContainer()->get('admin.workable_service')->getJobFromRedis($job->shortcode);
+            print_r($res);
+        }
+        //$candidates = $this->getContainer()->get('admin.workable_service')->getCandidatesFromRedis();
+        //print_r($candidates);
     }
-    
-    
+
 }

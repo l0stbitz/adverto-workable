@@ -56,7 +56,10 @@ class WorkableService {
      */
     public function getJobs($sinceId = false) {
         $jobs = [];
-        $response = $this->getResponse('jobs', $sinceId ? ['since_id' => $sinceId] : []);
+        $data = [];//['include_fields' => 'industry'];
+        if ($sinceId)
+            $data['since_id'] = $sinceId;
+        $response = $this->getResponse('jobs', $data);
         if (isset($response->jobs)) {
             $jobs = $response->jobs;
         }
@@ -109,16 +112,16 @@ class WorkableService {
 
         return $job;
     }
-    
+
     /**
      * Gets the job application fields 
      * @return
      */
     public function getJobAplicationFields($shortcode) {
-        $response = $this->getResponse('jobs/' . $shortcode.'/application_form');
+        $response = $this->getResponse('jobs/' . $shortcode . '/application_form');
         return $response;
-    }  
-    
+    }
+
     public function getJobApplicationFieldsFromRedis($jobId, $cached = false) {
         $key = CS::PREFIX . CS::SP . CS::JOBS . CS::SP . $jobId . CS::SP . CS::APPFIELDS;
         $job = json_decode($this->redis->get($key));
@@ -132,7 +135,7 @@ class WorkableService {
         }
 
         return $job;
-    }    
+    }
 
     /**
      * Gets all the candidates from the Workable API
@@ -177,22 +180,22 @@ class WorkableService {
     public function postCandidate($jobId, $data = []) {
 
         /*
-         {
-  "candidate": {
-    "name": "Jj Botha",
-    "firstname": "Jj",
-    "lastname": "Botha",
-    "headline": "Professional Administration Manager",
-    "summary": "A focussed, results-driven team player with many year experience in the field. Working my way up to management level, I have experience of every aspect of this role. I understand the challenges it brings, and have a proven track record of providing solutions.",
-    "address": "25772 Gustave Shore, Iowa, USA",
-    "phone": "1-859-557-6573",
-    "email": "jj_botha@fakemail.com",
-    "resume": {
-      "name": "jj_botha.doc",
-      "data": "6622116356e175ed0394b0d=="
-    }
-  }
-}
+          {
+          "candidate": {
+          "name": "Jj Botha",
+          "firstname": "Jj",
+          "lastname": "Botha",
+          "headline": "Professional Administration Manager",
+          "summary": "A focussed, results-driven team player with many year experience in the field. Working my way up to management level, I have experience of every aspect of this role. I understand the challenges it brings, and have a proven track record of providing solutions.",
+          "address": "25772 Gustave Shore, Iowa, USA",
+          "phone": "1-859-557-6573",
+          "email": "jj_botha@fakemail.com",
+          "resume": {
+          "name": "jj_botha.doc",
+          "data": "6622116356e175ed0394b0d=="
+          }
+          }
+          }
          */
         //Get response
         //$response = $this->getResponse('/jobs/'+$jobId+'/candidates', $params, 'POST');

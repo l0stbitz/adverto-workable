@@ -35,6 +35,23 @@ class RedisService {
         $this->expire = 3600;
         $this->logger = $container->get('logger');
     }
+    
+    /**
+     *
+     */
+    public function getAll($name) {
+        try {
+            $data = [];
+            $keys = $this->_c->keys($name);
+            foreach($keys as $key){
+                $data[] = json_decode($this->get($key));
+            }
+            return $data;
+        } catch (ConnectionException $e) {
+            $this->logger->error($e->getMessage());
+        }
+        return false;
+    }
 
     /**
      *
