@@ -1,0 +1,755 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}Workable{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <table class="table table-striped table-bordered table-hover listing-dataTable" id="job-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th>Created</th>
+                <th>State</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <!-- Row End -->
+    <div id="dialog-view" title="View Job">
+
+    </div>
+    <div id="dialog-apply" title="Apply for Job">
+
+    </div>    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    {% verbatim %}
+        <script id="apply-template" type="x-tmpl-mustache">
+            <form class="simple_form js-candidate-form" novalidate="novalidate" id="new_candidate" action="/jobs/468563/candidates" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="7GX2CgL6VPN/UTHNO7B6SeoIlS/44C3ZgwIv0A4NzYFHSpj+JWuff30Z/hwecDWxxEkju/WJc20xI4bOlPUBZA=="><input type="hidden" name="tsid" id="tsid" value="BAhmFzE0OTI3NTA1MzQuOTUzNDE1NA==--9060d8274738c7f589ba730310594a3736fbb99e">
+            <input type="hidden" name="candidate[linkedin_profile_url]" id="candidate_linkedin_profile_url">
+            <input type="hidden" name="resume_uploads_audit" id="resume-uploads-audit" value="">
+            <input type="hidden" name="avatar_uploads_audit" id="avatar-uploads-audit" value="">
+            <section class="section section--borderless">
+
+            <h6>Personal information</h6>
+            <div class="form-group">
+            <label class="string required control-label form-label " for="candidate_Name"><abbr title="required">*</abbr> Name</label>
+            <div class="form-group bottom">
+            <div class="bottom form-group form-group--half left">
+            <input class="form-control" placeholder="First name" type="text" name="candidate[firstname]" id="candidate_firstname">
+            </div>
+            <div class="bottom form-group form-group--half right">
+            <input class="form-control" placeholder="Last name" type="text" name="candidate[lastname]" id="candidate_lastname">
+            </div>
+            </div>
+            </div>
+            <div class="form-group ">
+            <label class="email required control-label form-label" for="candidate_email"><abbr title="required">*</abbr> Email</label>
+            <input class="form-control" type="email" name="candidate[email]" id="candidate_email">
+            <div data-ui="email-avatar-feedback"></div>
+            </div>
+            <div class="form-group form-group--asf">
+            <label class="country optional control-label form-label" for="candidate">Country</label>
+            <input class="form-control" id="candidate_country" name="candidate[country]" tabindex="-1" type="text">
+            </div>
+            <div class="form-group ">
+            <label class="string optional control-label form-label" for="candidate_headline">Headline</label>
+            <input class="form-control" type="text" name="candidate[headline]" id="candidate_headline">
+            </div>
+            <div class="form-group ">
+            <label class="tel required control-label form-label" for="candidate_phone"><abbr title="required">*</abbr> Phone</label>
+            <input class="form-control" type="tel" name="candidate[phone]" id="candidate_phone">
+            </div>
+            <div class="form-group ">
+            <label class="text required control-label form-label" for="candidate_address"><abbr title="required">*</abbr> Address</label>
+            <textarea rows="1" class="form-control form-control--autosize js-auto-height" name="candidate[address]" id="candidate_address" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 32px;"></textarea>
+            </div>
+            <div class="form-group bottom">
+            <div class="form-group bottom">
+            <label class="form-label">
+            Photo
+            </label>
+            <div class="form-text">
+            <div class="js-avatar-cache">
+            </div>
+            <div class="hide js-uploaded-photo">
+            <div class="photo-wrapper photo-wrapper--inline">
+            <div class="photo js-photo"></div>
+            </div>
+            <a id="remove_avatar_link" class="btn btn--delete" href="#">Delete photo</a>
+            </div>
+            <div class="js-upload-photo-controls">
+            <a id="upload_avatar_link" data-toggle="modal" data-target="#avatar-modal" href="#">Upload photo</a>
+            </div>
+            </div>
+            </div>
+
+            </div>
+            </section>
+            <section class="section">
+            <h6>Your Profile</h6>
+            <div class="form-group">
+            <label class="form-label">Education</label>
+            <div class="form-text">
+            <a class="add_nested_fields" data-association="educations" data-blueprint-id="educations_fields_blueprint" href="javascript:void(0)">Add education</a>
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="form-label">Experience</label>
+            <div class="form-text">
+            <a class="add_nested_fields" data-association="experiences" data-blueprint-id="experiences_fields_blueprint" href="javascript:void(0)">Add experience</a>
+            </div>
+            </div>
+            <div class="form-group ">
+            <label class="text optional control-label form-label" for="candidate_summary">Summary</label>
+            <textarea class="form-control js-auto-height" rows="4" name="candidate[summary]" id="candidate_summary" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 86px;"></textarea>
+            </div>
+            <div class="form-group bottom" id="resume_cache">
+            <label class="form-label">
+            Resume
+            </label>
+            <div class="form-text">
+            <input type="hidden" name="resume_cache_token" id="resume_cache_token">
+            <a data-toggle="modal" class="" href="#resume-modal">Upload resume</a>
+            </div>
+
+            </div>
+            </section>
+            <section class="section">
+            <h6>Application Details</h6>
+            <div class="form-group ">
+            <label class="text optional control-label form-label" for="candidate_cover_letter">Cover letter</label>
+            <textarea class="form-control js-auto-height" rows="4" name="candidate[cover_letter]" id="candidate_cover_letter" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 86px;"></textarea>
+            </div>
+            <div class="form-group form-group--required bottom">
+            <label class="form-label">Questions</label>
+            <div class="fields"><div class="form-group form-group--toggles">
+            <input type="hidden" value="687587" name="candidate[answers_attributes][0][question_id]" id="candidate_answers_attributes_0_question_id">
+            <input type="hidden" value="BooleanAnswer" name="candidate[answers_attributes][0][type]" id="candidate_answers_attributes_0_type">
+            <div class="radios">
+            <span class="radio yes">
+            <input type="radio" value="true" name="candidate[answers_attributes][0][checked]" id="candidate_answers_attributes_0_checked_true">
+            <label class="radio" for="candidate_answers_attributes_0_checked_true">Yes</label>
+            </span>
+            <span class="radio no">
+            <input type="radio" value="false" name="candidate[answers_attributes][0][checked]" id="candidate_answers_attributes_0_checked_false">
+            <label class="radio" for="candidate_answers_attributes_0_checked_false">No</label>
+            </span>
+            </div>
+            <span class="faux-label">
+            Do you have prior experience working directly with clients on design projects?
+            </span>
+            </div>
+
+            </div><div class="fields"><div class="form-group">
+            <input type="hidden" value="687588" name="candidate[answers_attributes][1][question_id]" id="candidate_answers_attributes_1_question_id">
+            <input type="hidden" value="MultipleChoiceAnswer" name="candidate[answers_attributes][1][type]" id="candidate_answers_attributes_1_type">
+            <label class="faux-label" for="candidate_answers_attributes_1_choices">How would you evaluate your communication skills, as well as your ability to execute a design directly with a client.</label>
+            <div class="radios">
+            <ul>
+            <li><label for="candidate_answers_attributes_1_choice_ids_295202"><input type="radio" value="295202" name="candidate[answers_attributes][1][choice_ids]" id="candidate_answers_attributes_1_choice_ids_295202"><label class="collection_radio_buttons" for="candidate_answers_attributes_1_choice_ids_295202">Poor</label></label></li><li><label for="candidate_answers_attributes_1_choice_ids_295203"><input type="radio" value="295203" name="candidate[answers_attributes][1][choice_ids]" id="candidate_answers_attributes_1_choice_ids_295203"><label class="collection_radio_buttons" for="candidate_answers_attributes_1_choice_ids_295203">Fair</label></label></li><li><label for="candidate_answers_attributes_1_choice_ids_295204"><input type="radio" value="295204" name="candidate[answers_attributes][1][choice_ids]" id="candidate_answers_attributes_1_choice_ids_295204"><label class="collection_radio_buttons" for="candidate_answers_attributes_1_choice_ids_295204">Average</label></label></li><li><label for="candidate_answers_attributes_1_choice_ids_295205"><input type="radio" value="295205" name="candidate[answers_attributes][1][choice_ids]" id="candidate_answers_attributes_1_choice_ids_295205"><label class="collection_radio_buttons" for="candidate_answers_attributes_1_choice_ids_295205">Good</label></label></li><li><label for="candidate_answers_attributes_1_choice_ids_295206"><input type="radio" value="295206" name="candidate[answers_attributes][1][choice_ids]" id="candidate_answers_attributes_1_choice_ids_295206"><label class="collection_radio_buttons" for="candidate_answers_attributes_1_choice_ids_295206">Excellent</label></label></li>
+            </ul>
+            </div>
+            </div>
+
+            </div><div class="fields"><div class="form-group">
+            <div class="control-group"><div class="controls"><input type="hidden" value="687589" name="candidate[answers_attributes][2][question_id]" id="candidate_answers_attributes_2_question_id"></div></div>
+            <input type="hidden" value="FreeTextAnswer" name="candidate[answers_attributes][2][type]" id="candidate_answers_attributes_2_type">
+            <label class="faux-label" for="candidate_answers_attributes_2_body">If you have an online portfolio, please share the URL below.</label>
+            <textarea class="form-control" rows="4" name="candidate[answers_attributes][2][body]" id="candidate_answers_attributes_2_body"></textarea>
+            </div>
+
+            </div></div>
+            </section>
+            <section class="section section--cta">
+            <input type="submit" name="commit" value="Submit your application" class="btn btn btn--large btn--primary" data-disable-with="Submitting...">
+            </section>
+            <div id="educations_fields_blueprint" style="display: none" data-blueprint="<div class=&quot;fields&quot;><div class='form-group form-group--nested'>
+            <input type=&quot;hidden&quot; value=&quot;false&quot; name=&quot;candidate[educations_attributes][new_educations][_destroy]&quot; id=&quot;candidate_educations_attributes_new_educations__destroy&quot; /><a class=&quot;btn btn--delete right remove_nested_fields&quot; data-association=&quot;educations&quot; href=&quot;javascript:void(0)&quot;>Delete education</a>
+            <div class='form-group '>
+            <input class=&quot;form-control&quot; placeholder=&quot;School (required)&quot; type=&quot;text&quot; name=&quot;candidate[educations_attributes][new_educations][school]&quot; id=&quot;candidate_educations_attributes_new_educations_school&quot; />
+            </div>
+            <div class='form-group '>
+            <input class=&quot;form-control&quot; placeholder=&quot;Field of study&quot; type=&quot;text&quot; name=&quot;candidate[educations_attributes][new_educations][field_of_study]&quot; id=&quot;candidate_educations_attributes_new_educations_field_of_study&quot; />
+            </div>
+            <div class='form-group '>
+            <input class=&quot;form-control&quot; placeholder=&quot;Degree&quot; type=&quot;text&quot; name=&quot;candidate[educations_attributes][new_educations][degree]&quot; id=&quot;candidate_educations_attributes_new_educations_degree&quot; />
+            </div>
+            <div class='form-group '>
+            <select id=&quot;candidate_educations_attributes_new_educations_start_date_1i&quot; name=&quot;candidate[educations_attributes][new_educations][start_date(1i)]&quot; class=&quot;form-control form-control--auto year&quot;>
+            <option value=&quot;&quot;>Year</option>
+            <option value=&quot;2017&quot;>2017</option>
+            <option value=&quot;2016&quot;>2016</option>
+            <option value=&quot;2015&quot;>2015</option>
+            <option value=&quot;2014&quot;>2014</option>
+            <option value=&quot;2013&quot;>2013</option>
+            <option value=&quot;2012&quot;>2012</option>
+            <option value=&quot;2011&quot;>2011</option>
+            <option value=&quot;2010&quot;>2010</option>
+            <option value=&quot;2009&quot;>2009</option>
+            <option value=&quot;2008&quot;>2008</option>
+            <option value=&quot;2007&quot;>2007</option>
+            <option value=&quot;2006&quot;>2006</option>
+            <option value=&quot;2005&quot;>2005</option>
+            <option value=&quot;2004&quot;>2004</option>
+            <option value=&quot;2003&quot;>2003</option>
+            <option value=&quot;2002&quot;>2002</option>
+            <option value=&quot;2001&quot;>2001</option>
+            <option value=&quot;2000&quot;>2000</option>
+            <option value=&quot;1999&quot;>1999</option>
+            <option value=&quot;1998&quot;>1998</option>
+            <option value=&quot;1997&quot;>1997</option>
+            <option value=&quot;1996&quot;>1996</option>
+            <option value=&quot;1995&quot;>1995</option>
+            <option value=&quot;1994&quot;>1994</option>
+            <option value=&quot;1993&quot;>1993</option>
+            <option value=&quot;1992&quot;>1992</option>
+            <option value=&quot;1991&quot;>1991</option>
+            <option value=&quot;1990&quot;>1990</option>
+            <option value=&quot;1989&quot;>1989</option>
+            <option value=&quot;1988&quot;>1988</option>
+            <option value=&quot;1987&quot;>1987</option>
+            <option value=&quot;1986&quot;>1986</option>
+            <option value=&quot;1985&quot;>1985</option>
+            <option value=&quot;1984&quot;>1984</option>
+            <option value=&quot;1983&quot;>1983</option>
+            <option value=&quot;1982&quot;>1982</option>
+            <option value=&quot;1981&quot;>1981</option>
+            <option value=&quot;1980&quot;>1980</option>
+            <option value=&quot;1979&quot;>1979</option>
+            <option value=&quot;1978&quot;>1978</option>
+            <option value=&quot;1977&quot;>1977</option>
+            <option value=&quot;1976&quot;>1976</option>
+            <option value=&quot;1975&quot;>1975</option>
+            <option value=&quot;1974&quot;>1974</option>
+            <option value=&quot;1973&quot;>1973</option>
+            <option value=&quot;1972&quot;>1972</option>
+            <option value=&quot;1971&quot;>1971</option>
+            <option value=&quot;1970&quot;>1970</option>
+            <option value=&quot;1969&quot;>1969</option>
+            <option value=&quot;1968&quot;>1968</option>
+            <option value=&quot;1967&quot;>1967</option>
+            <option value=&quot;1966&quot;>1966</option>
+            <option value=&quot;1965&quot;>1965</option>
+            <option value=&quot;1964&quot;>1964</option>
+            <option value=&quot;1963&quot;>1963</option>
+            <option value=&quot;1962&quot;>1962</option>
+            <option value=&quot;1961&quot;>1961</option>
+            <option value=&quot;1960&quot;>1960</option>
+            <option value=&quot;1959&quot;>1959</option>
+            <option value=&quot;1958&quot;>1958</option>
+            <option value=&quot;1957&quot;>1957</option>
+            <option value=&quot;1956&quot;>1956</option>
+            <option value=&quot;1955&quot;>1955</option>
+            <option value=&quot;1954&quot;>1954</option>
+            <option value=&quot;1953&quot;>1953</option>
+            <option value=&quot;1952&quot;>1952</option>
+            <option value=&quot;1951&quot;>1951</option>
+            <option value=&quot;1950&quot;>1950</option>
+            <option value=&quot;1949&quot;>1949</option>
+            <option value=&quot;1948&quot;>1948</option>
+            <option value=&quot;1947&quot;>1947</option>
+            </select>
+            <select id=&quot;candidate_educations_attributes_new_educations_start_date_2i&quot; name=&quot;candidate[educations_attributes][new_educations][start_date(2i)]&quot; class=&quot;form-control form-control--auto month&quot;>
+            <option value=&quot;&quot;>Month</option>
+            <option value=&quot;1&quot;>January</option>
+            <option value=&quot;2&quot;>February</option>
+            <option value=&quot;3&quot;>March</option>
+            <option value=&quot;4&quot;>April</option>
+            <option value=&quot;5&quot;>May</option>
+            <option value=&quot;6&quot;>June</option>
+            <option value=&quot;7&quot;>July</option>
+            <option value=&quot;8&quot;>August</option>
+            <option value=&quot;9&quot;>September</option>
+            <option value=&quot;10&quot;>October</option>
+            <option value=&quot;11&quot;>November</option>
+            <option value=&quot;12&quot;>December</option>
+            </select>
+            <input type=&quot;hidden&quot; id=&quot;candidate_educations_attributes_new_educations_start_date_3i&quot; name=&quot;candidate[educations_attributes][new_educations][start_date(3i)]&quot; value=&quot;1&quot; />
+
+            <span class='separator'>to</span>
+            <select id=&quot;candidate_educations_attributes_new_educations_end_date_1i&quot; name=&quot;candidate[educations_attributes][new_educations][end_date(1i)]&quot; class=&quot;form-control form-control--auto year&quot;>
+            <option value=&quot;&quot;>Year</option>
+            <option value=&quot;2024&quot;>2024</option>
+            <option value=&quot;2023&quot;>2023</option>
+            <option value=&quot;2022&quot;>2022</option>
+            <option value=&quot;2021&quot;>2021</option>
+            <option value=&quot;2020&quot;>2020</option>
+            <option value=&quot;2019&quot;>2019</option>
+            <option value=&quot;2018&quot;>2018</option>
+            <option value=&quot;2017&quot;>2017</option>
+            <option value=&quot;2016&quot;>2016</option>
+            <option value=&quot;2015&quot;>2015</option>
+            <option value=&quot;2014&quot;>2014</option>
+            <option value=&quot;2013&quot;>2013</option>
+            <option value=&quot;2012&quot;>2012</option>
+            <option value=&quot;2011&quot;>2011</option>
+            <option value=&quot;2010&quot;>2010</option>
+            <option value=&quot;2009&quot;>2009</option>
+            <option value=&quot;2008&quot;>2008</option>
+            <option value=&quot;2007&quot;>2007</option>
+            <option value=&quot;2006&quot;>2006</option>
+            <option value=&quot;2005&quot;>2005</option>
+            <option value=&quot;2004&quot;>2004</option>
+            <option value=&quot;2003&quot;>2003</option>
+            <option value=&quot;2002&quot;>2002</option>
+            <option value=&quot;2001&quot;>2001</option>
+            <option value=&quot;2000&quot;>2000</option>
+            <option value=&quot;1999&quot;>1999</option>
+            <option value=&quot;1998&quot;>1998</option>
+            <option value=&quot;1997&quot;>1997</option>
+            <option value=&quot;1996&quot;>1996</option>
+            <option value=&quot;1995&quot;>1995</option>
+            <option value=&quot;1994&quot;>1994</option>
+            <option value=&quot;1993&quot;>1993</option>
+            <option value=&quot;1992&quot;>1992</option>
+            <option value=&quot;1991&quot;>1991</option>
+            <option value=&quot;1990&quot;>1990</option>
+            <option value=&quot;1989&quot;>1989</option>
+            <option value=&quot;1988&quot;>1988</option>
+            <option value=&quot;1987&quot;>1987</option>
+            <option value=&quot;1986&quot;>1986</option>
+            <option value=&quot;1985&quot;>1985</option>
+            <option value=&quot;1984&quot;>1984</option>
+            <option value=&quot;1983&quot;>1983</option>
+            <option value=&quot;1982&quot;>1982</option>
+            <option value=&quot;1981&quot;>1981</option>
+            <option value=&quot;1980&quot;>1980</option>
+            <option value=&quot;1979&quot;>1979</option>
+            <option value=&quot;1978&quot;>1978</option>
+            <option value=&quot;1977&quot;>1977</option>
+            <option value=&quot;1976&quot;>1976</option>
+            <option value=&quot;1975&quot;>1975</option>
+            <option value=&quot;1974&quot;>1974</option>
+            <option value=&quot;1973&quot;>1973</option>
+            <option value=&quot;1972&quot;>1972</option>
+            <option value=&quot;1971&quot;>1971</option>
+            <option value=&quot;1970&quot;>1970</option>
+            <option value=&quot;1969&quot;>1969</option>
+            <option value=&quot;1968&quot;>1968</option>
+            <option value=&quot;1967&quot;>1967</option>
+            <option value=&quot;1966&quot;>1966</option>
+            <option value=&quot;1965&quot;>1965</option>
+            <option value=&quot;1964&quot;>1964</option>
+            <option value=&quot;1963&quot;>1963</option>
+            <option value=&quot;1962&quot;>1962</option>
+            <option value=&quot;1961&quot;>1961</option>
+            <option value=&quot;1960&quot;>1960</option>
+            <option value=&quot;1959&quot;>1959</option>
+            <option value=&quot;1958&quot;>1958</option>
+            <option value=&quot;1957&quot;>1957</option>
+            <option value=&quot;1956&quot;>1956</option>
+            <option value=&quot;1955&quot;>1955</option>
+            <option value=&quot;1954&quot;>1954</option>
+            <option value=&quot;1953&quot;>1953</option>
+            <option value=&quot;1952&quot;>1952</option>
+            <option value=&quot;1951&quot;>1951</option>
+            <option value=&quot;1950&quot;>1950</option>
+            <option value=&quot;1949&quot;>1949</option>
+            <option value=&quot;1948&quot;>1948</option>
+            <option value=&quot;1947&quot;>1947</option>
+            </select>
+            <select id=&quot;candidate_educations_attributes_new_educations_end_date_2i&quot; name=&quot;candidate[educations_attributes][new_educations][end_date(2i)]&quot; class=&quot;form-control form-control--auto month&quot;>
+            <option value=&quot;&quot;>Month</option>
+            <option value=&quot;1&quot;>January</option>
+            <option value=&quot;2&quot;>February</option>
+            <option value=&quot;3&quot;>March</option>
+            <option value=&quot;4&quot;>April</option>
+            <option value=&quot;5&quot;>May</option>
+            <option value=&quot;6&quot;>June</option>
+            <option value=&quot;7&quot;>July</option>
+            <option value=&quot;8&quot;>August</option>
+            <option value=&quot;9&quot;>September</option>
+            <option value=&quot;10&quot;>October</option>
+            <option value=&quot;11&quot;>November</option>
+            <option value=&quot;12&quot;>December</option>
+            </select>
+            <input type=&quot;hidden&quot; id=&quot;candidate_educations_attributes_new_educations_end_date_3i&quot; name=&quot;candidate[educations_attributes][new_educations][end_date(3i)]&quot; value=&quot;1&quot; />
+
+            </div>
+            </div>
+
+            </div>"></div> <div id="experiences_fields_blueprint" style="display: none" data-blueprint="<div class=&quot;fields&quot;><div class='form-group form-group--nested'>
+            <input type=&quot;hidden&quot; value=&quot;false&quot; name=&quot;candidate[experiences_attributes][new_experiences][_destroy]&quot; id=&quot;candidate_experiences_attributes_new_experiences__destroy&quot; /><a class=&quot;btn btn--delete right remove_nested_fields&quot; data-association=&quot;experiences&quot; href=&quot;javascript:void(0)&quot;>Delete experience</a>
+            <div class='form-group '>
+            <input class=&quot;form-control&quot; placeholder=&quot;Company&quot; type=&quot;text&quot; name=&quot;candidate[experiences_attributes][new_experiences][company]&quot; id=&quot;candidate_experiences_attributes_new_experiences_company&quot; />
+            </div>
+            <div class='form-group '>
+            <input class=&quot;form-control&quot; placeholder=&quot;Industry&quot; type=&quot;text&quot; name=&quot;candidate[experiences_attributes][new_experiences][industry]&quot; id=&quot;candidate_experiences_attributes_new_experiences_industry&quot; />
+            </div>
+            <div class='form-group '>
+            <input class=&quot;form-control&quot; placeholder=&quot;Title (required)&quot; type=&quot;text&quot; name=&quot;candidate[experiences_attributes][new_experiences][title]&quot; id=&quot;candidate_experiences_attributes_new_experiences_title&quot; />
+            </div>
+            <div class='form-group '>
+            <textarea class=&quot;form-control&quot; placeholder=&quot;Summary&quot; rows=&quot;4&quot; name=&quot;candidate[experiences_attributes][new_experiences][summary]&quot; id=&quot;candidate_experiences_attributes_new_experiences_summary&quot;>&amp;#x000A;</textarea>
+            </div>
+            <div class='form-group '>
+            <select id=&quot;candidate_experiences_attributes_new_experiences_start_date_1i&quot; name=&quot;candidate[experiences_attributes][new_experiences][start_date(1i)]&quot; class=&quot;form-control form-control--auto year&quot;>
+            <option value=&quot;&quot;>Year</option>
+            <option value=&quot;2017&quot;>2017</option>
+            <option value=&quot;2016&quot;>2016</option>
+            <option value=&quot;2015&quot;>2015</option>
+            <option value=&quot;2014&quot;>2014</option>
+            <option value=&quot;2013&quot;>2013</option>
+            <option value=&quot;2012&quot;>2012</option>
+            <option value=&quot;2011&quot;>2011</option>
+            <option value=&quot;2010&quot;>2010</option>
+            <option value=&quot;2009&quot;>2009</option>
+            <option value=&quot;2008&quot;>2008</option>
+            <option value=&quot;2007&quot;>2007</option>
+            <option value=&quot;2006&quot;>2006</option>
+            <option value=&quot;2005&quot;>2005</option>
+            <option value=&quot;2004&quot;>2004</option>
+            <option value=&quot;2003&quot;>2003</option>
+            <option value=&quot;2002&quot;>2002</option>
+            <option value=&quot;2001&quot;>2001</option>
+            <option value=&quot;2000&quot;>2000</option>
+            <option value=&quot;1999&quot;>1999</option>
+            <option value=&quot;1998&quot;>1998</option>
+            <option value=&quot;1997&quot;>1997</option>
+            <option value=&quot;1996&quot;>1996</option>
+            <option value=&quot;1995&quot;>1995</option>
+            <option value=&quot;1994&quot;>1994</option>
+            <option value=&quot;1993&quot;>1993</option>
+            <option value=&quot;1992&quot;>1992</option>
+            <option value=&quot;1991&quot;>1991</option>
+            <option value=&quot;1990&quot;>1990</option>
+            <option value=&quot;1989&quot;>1989</option>
+            <option value=&quot;1988&quot;>1988</option>
+            <option value=&quot;1987&quot;>1987</option>
+            <option value=&quot;1986&quot;>1986</option>
+            <option value=&quot;1985&quot;>1985</option>
+            <option value=&quot;1984&quot;>1984</option>
+            <option value=&quot;1983&quot;>1983</option>
+            <option value=&quot;1982&quot;>1982</option>
+            <option value=&quot;1981&quot;>1981</option>
+            <option value=&quot;1980&quot;>1980</option>
+            <option value=&quot;1979&quot;>1979</option>
+            <option value=&quot;1978&quot;>1978</option>
+            <option value=&quot;1977&quot;>1977</option>
+            <option value=&quot;1976&quot;>1976</option>
+            <option value=&quot;1975&quot;>1975</option>
+            <option value=&quot;1974&quot;>1974</option>
+            <option value=&quot;1973&quot;>1973</option>
+            <option value=&quot;1972&quot;>1972</option>
+            <option value=&quot;1971&quot;>1971</option>
+            <option value=&quot;1970&quot;>1970</option>
+            <option value=&quot;1969&quot;>1969</option>
+            <option value=&quot;1968&quot;>1968</option>
+            <option value=&quot;1967&quot;>1967</option>
+            <option value=&quot;1966&quot;>1966</option>
+            <option value=&quot;1965&quot;>1965</option>
+            <option value=&quot;1964&quot;>1964</option>
+            <option value=&quot;1963&quot;>1963</option>
+            <option value=&quot;1962&quot;>1962</option>
+            <option value=&quot;1961&quot;>1961</option>
+            <option value=&quot;1960&quot;>1960</option>
+            <option value=&quot;1959&quot;>1959</option>
+            <option value=&quot;1958&quot;>1958</option>
+            <option value=&quot;1957&quot;>1957</option>
+            <option value=&quot;1956&quot;>1956</option>
+            <option value=&quot;1955&quot;>1955</option>
+            <option value=&quot;1954&quot;>1954</option>
+            <option value=&quot;1953&quot;>1953</option>
+            <option value=&quot;1952&quot;>1952</option>
+            <option value=&quot;1951&quot;>1951</option>
+            <option value=&quot;1950&quot;>1950</option>
+            <option value=&quot;1949&quot;>1949</option>
+            <option value=&quot;1948&quot;>1948</option>
+            <option value=&quot;1947&quot;>1947</option>
+            </select>
+            <select id=&quot;candidate_experiences_attributes_new_experiences_start_date_2i&quot; name=&quot;candidate[experiences_attributes][new_experiences][start_date(2i)]&quot; class=&quot;form-control form-control--auto month&quot;>
+            <option value=&quot;&quot;>Month</option>
+            <option value=&quot;1&quot;>January</option>
+            <option value=&quot;2&quot;>February</option>
+            <option value=&quot;3&quot;>March</option>
+            <option value=&quot;4&quot;>April</option>
+            <option value=&quot;5&quot;>May</option>
+            <option value=&quot;6&quot;>June</option>
+            <option value=&quot;7&quot;>July</option>
+            <option value=&quot;8&quot;>August</option>
+            <option value=&quot;9&quot;>September</option>
+            <option value=&quot;10&quot;>October</option>
+            <option value=&quot;11&quot;>November</option>
+            <option value=&quot;12&quot;>December</option>
+            </select>
+            <input type=&quot;hidden&quot; id=&quot;candidate_experiences_attributes_new_experiences_start_date_3i&quot; name=&quot;candidate[experiences_attributes][new_experiences][start_date(3i)]&quot; value=&quot;1&quot; />
+
+            <span class='separator'>to</span>
+            <select id=&quot;candidate_experiences_attributes_new_experiences_end_date_1i&quot; name=&quot;candidate[experiences_attributes][new_experiences][end_date(1i)]&quot; class=&quot;form-control form-control--auto year&quot;>
+            <option value=&quot;&quot;>Year</option>
+            <option value=&quot;2017&quot;>2017</option>
+            <option value=&quot;2016&quot;>2016</option>
+            <option value=&quot;2015&quot;>2015</option>
+            <option value=&quot;2014&quot;>2014</option>
+            <option value=&quot;2013&quot;>2013</option>
+            <option value=&quot;2012&quot;>2012</option>
+            <option value=&quot;2011&quot;>2011</option>
+            <option value=&quot;2010&quot;>2010</option>
+            <option value=&quot;2009&quot;>2009</option>
+            <option value=&quot;2008&quot;>2008</option>
+            <option value=&quot;2007&quot;>2007</option>
+            <option value=&quot;2006&quot;>2006</option>
+            <option value=&quot;2005&quot;>2005</option>
+            <option value=&quot;2004&quot;>2004</option>
+            <option value=&quot;2003&quot;>2003</option>
+            <option value=&quot;2002&quot;>2002</option>
+            <option value=&quot;2001&quot;>2001</option>
+            <option value=&quot;2000&quot;>2000</option>
+            <option value=&quot;1999&quot;>1999</option>
+            <option value=&quot;1998&quot;>1998</option>
+            <option value=&quot;1997&quot;>1997</option>
+            <option value=&quot;1996&quot;>1996</option>
+            <option value=&quot;1995&quot;>1995</option>
+            <option value=&quot;1994&quot;>1994</option>
+            <option value=&quot;1993&quot;>1993</option>
+            <option value=&quot;1992&quot;>1992</option>
+            <option value=&quot;1991&quot;>1991</option>
+            <option value=&quot;1990&quot;>1990</option>
+            <option value=&quot;1989&quot;>1989</option>
+            <option value=&quot;1988&quot;>1988</option>
+            <option value=&quot;1987&quot;>1987</option>
+            <option value=&quot;1986&quot;>1986</option>
+            <option value=&quot;1985&quot;>1985</option>
+            <option value=&quot;1984&quot;>1984</option>
+            <option value=&quot;1983&quot;>1983</option>
+            <option value=&quot;1982&quot;>1982</option>
+            <option value=&quot;1981&quot;>1981</option>
+            <option value=&quot;1980&quot;>1980</option>
+            <option value=&quot;1979&quot;>1979</option>
+            <option value=&quot;1978&quot;>1978</option>
+            <option value=&quot;1977&quot;>1977</option>
+            <option value=&quot;1976&quot;>1976</option>
+            <option value=&quot;1975&quot;>1975</option>
+            <option value=&quot;1974&quot;>1974</option>
+            <option value=&quot;1973&quot;>1973</option>
+            <option value=&quot;1972&quot;>1972</option>
+            <option value=&quot;1971&quot;>1971</option>
+            <option value=&quot;1970&quot;>1970</option>
+            <option value=&quot;1969&quot;>1969</option>
+            <option value=&quot;1968&quot;>1968</option>
+            <option value=&quot;1967&quot;>1967</option>
+            <option value=&quot;1966&quot;>1966</option>
+            <option value=&quot;1965&quot;>1965</option>
+            <option value=&quot;1964&quot;>1964</option>
+            <option value=&quot;1963&quot;>1963</option>
+            <option value=&quot;1962&quot;>1962</option>
+            <option value=&quot;1961&quot;>1961</option>
+            <option value=&quot;1960&quot;>1960</option>
+            <option value=&quot;1959&quot;>1959</option>
+            <option value=&quot;1958&quot;>1958</option>
+            <option value=&quot;1957&quot;>1957</option>
+            <option value=&quot;1956&quot;>1956</option>
+            <option value=&quot;1955&quot;>1955</option>
+            <option value=&quot;1954&quot;>1954</option>
+            <option value=&quot;1953&quot;>1953</option>
+            <option value=&quot;1952&quot;>1952</option>
+            <option value=&quot;1951&quot;>1951</option>
+            <option value=&quot;1950&quot;>1950</option>
+            <option value=&quot;1949&quot;>1949</option>
+            <option value=&quot;1948&quot;>1948</option>
+            <option value=&quot;1947&quot;>1947</option>
+            </select>
+            <select id=&quot;candidate_experiences_attributes_new_experiences_end_date_2i&quot; name=&quot;candidate[experiences_attributes][new_experiences][end_date(2i)]&quot; class=&quot;form-control form-control--auto month&quot;>
+            <option value=&quot;&quot;>Month</option>
+            <option value=&quot;1&quot;>January</option>
+            <option value=&quot;2&quot;>February</option>
+            <option value=&quot;3&quot;>March</option>
+            <option value=&quot;4&quot;>April</option>
+            <option value=&quot;5&quot;>May</option>
+            <option value=&quot;6&quot;>June</option>
+            <option value=&quot;7&quot;>July</option>
+            <option value=&quot;8&quot;>August</option>
+            <option value=&quot;9&quot;>September</option>
+            <option value=&quot;10&quot;>October</option>
+            <option value=&quot;11&quot;>November</option>
+            <option value=&quot;12&quot;>December</option>
+            </select>
+            <input type=&quot;hidden&quot; id=&quot;candidate_experiences_attributes_new_experiences_end_date_3i&quot; name=&quot;candidate[experiences_attributes][new_experiences][end_date(3i)]&quot; value=&quot;1&quot; />
+
+            </div>
+            <div class='form-group '>
+            <label for=&quot;candidate_experiences_attributes_new_experiences_current&quot;><input name=&quot;candidate[experiences_attributes][new_experiences][current]&quot; type=&quot;hidden&quot; value=&quot;0&quot; /><input type=&quot;checkbox&quot; value=&quot;1&quot; name=&quot;candidate[experiences_attributes][new_experiences][current]&quot; id=&quot;candidate_experiences_attributes_new_experiences_current&quot; />
+            I currently work here
+            </label></div>
+            </div>
+
+            </div>"></div></form>
+        </script>
+        <script id="job-template" type="x-tmpl-mustache">
+            <form method="get" class="form-horizontal">
+            {{#data}}
+            <div class="form-group"><label class="col-sm-2 control-label">Id</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ id }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">title</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ title }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">full_title</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ full_title }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">shortcode</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ shortcode }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">code</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ code }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">state</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ state }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">department</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ department }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">url</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ url }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">application_url</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ application_url }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">shortlink </label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ shortlink }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">location</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ location }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">created_at</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ created_at }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">full_description</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ full_description }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">requirements</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ requirements }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">benefits</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ benefits }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">employment_type</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ employment_type }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">industry</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ industry }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">function</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ function }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">education</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ education }}"></div>
+            </div>
+            <div class="form-group"><label class="col-sm-2 control-label">education</label>
+            <div class="col-sm-10"><input type="text" class="form-control" value="{{ education }}"></div>
+            </div>
+            {{/data}}
+
+            </form>
+
+        </script>
+    {% endverbatim %}
+    <script type="text/javascript">
+
+
+        viewDialog = $("#dialog-view").dialog({
+            autoOpen: false,
+            height: 700,
+            width: 700,
+            modal: true,
+            buttons: {
+                Cancel: function () {
+                    viewDialog.dialog("close");
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+        $(document).on("click", ".view-job", function (event) {
+            event.preventDefault();
+            $.getJSON("/admin/workable/job/" + $(this).data('id'), function (data) {
+                console.log(data);
+                var template = $('#job-template').html();
+                var data = {'data': data};
+                var rendered = Mustache.render(template, data);
+                $('#dialog-view').html(rendered);
+                viewDialog.dialog("open");
+            });
+        });
+
+        applyDialog = $("#dialog-apply").dialog({
+            autoOpen: false,
+            height: 700,
+            width: 700,
+            modal: true,
+            buttons: {
+                Cancel: function () {
+                    applyDialog.dialog("close");
+                }
+            },
+            close: function () {
+
+            }
+        });
+
+        $(document).on("click", ".apply-job", function (event) {
+            event.preventDefault();
+            $.getJSON("/admin/workable/job/" + $(this).data('id') + "/application_fields", function (data) {
+                var data = {'data': data};
+                var template = $('#apply-template').html();
+                var rendered = Mustache.render(template, data);
+                $('#dialog-apply').html(rendered);
+                applyDialog.dialog("open");
+            });
+        });
+
+        var table = $('#job-list').DataTable({
+            processing: true,
+            serverSide: true,
+            columns: [
+                {
+                    data: 'shortcode'
+                },
+                {
+                    data: 'title'
+                },
+                {
+                    data: 'department',
+                    defaultContent: 'N/A',
+                },
+                {
+                    data: 'created_at',
+                },
+                {
+                    data: 'state'
+                },
+                {
+                    data: 'id',
+                    render: function (data, type, full, meta) {
+                        return '<a class="btn btn-warning view-job" data-id="' + full.shortcode + '" href="#">View</a><a class="btn btn-warning apply-job" data-id="' + full.shortcode + '" href="#">Apply</a>';
+                    }
+                },
+            ],
+            ajax: {
+                url: "{{ path('admin_workable_search_jobs') }}",
+                type: "POST",
+                data: function (d) {
+                    d.roleParams = [];
+                    $('input:checked').each(function () {
+                        d.roleParams.push($(this).attr('value'));
+                    });
+                }
+            }
+        });
+    </script>
+{% endblock %}

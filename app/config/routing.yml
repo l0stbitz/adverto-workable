@@ -1,0 +1,18 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /user
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+job_search:
+    resource: "@JobSearchBundle/Resources/config/routing.yml"
+    prefix:   /ajax/jobsearch
+    
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /

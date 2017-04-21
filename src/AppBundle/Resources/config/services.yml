@@ -1,0 +1,8 @@
+services:
+    admin.workable_service:
+        class: Adverto\AdminBundle\Service\WorkableService
+        arguments: ["@service_container"]
+        
+    admin.redis_service:
+        class: Adverto\AdminBundle\Service\RedisService
+        arguments: ["@service_container"]        

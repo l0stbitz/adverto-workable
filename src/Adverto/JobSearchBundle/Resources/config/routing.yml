@@ -1,0 +1,12 @@
+job_search_homepage:
+    path:     /
+    defaults: { _controller: JobSearchBundle:Default:index }
+    
+job_search_filtering:
+    path:     /filtering
+    defaults: { _controller: JobSearchBundle:Default:filtering }    
+
+    
+job_search_jobs:
+    path:     /jobs
+    defaults: { _controller: JobSearchBundle:Default:jobs } 

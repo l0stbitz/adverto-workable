@@ -1,0 +1,18 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <h1>Welcome Administrator</h1>
+    <div class="float-row" style="min-height: 765px;">
+        <p class="welcome-message">Click on any section from the menu to manage it.</p>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

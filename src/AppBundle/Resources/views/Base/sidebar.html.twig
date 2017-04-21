@@ -1,0 +1,54 @@
+<!-- Sidebar Start -->
+<aside class="sidebar sidebarhidden">
+    <div class="sidebar-in">
+        <!-- Sidebar Navigation Start -->
+        <nav class="navigation">
+            <!-- User Section Start -->
+            <div class="user">
+                <figure>
+                    <a href="{{ path('admin_profile') }}">
+                        <img src="/images/avatar.png" alt="Chafic Abillama, Managing Director">
+                    </a>
+                </figure>
+                <div class="clearfix"></div>
+                <div class="welcome">
+                    <p>Chafic Abillama</p>
+                    <h5><a href="{{ path('admin_profile') }}">Managing Director</a></h5>
+                </div>
+                <a href="#" class="togglemenu"><i class="glyphicon glyphicon-arrow-left"></i><i class="glyphicon glyphicon-arrow-right"></i></a>
+            </div>
+            <!-- User Section End -->
+            <ul class="navi-acc" id="nav2">
+                <li>
+                    <a href="{{ path('admin_profile') }}"><i class="fa fa-user" aria-hidden="true"></i> <span>My Profile</span></a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_settings') }}"><i class="fa fa-cog" aria-hidden="true"></i> <span>Solution Setup</span></a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_users') }}" class="sectionHome">
+                        <i class="fa fa-users" aria-hidden="true"></i> <span>User Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_homepage') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Content</span></a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_jmp') }}"><i class="fa fa-briefcase" aria-hidden="true"></i> <span>JMP</span></a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_report') }}" class="analytics"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Job Report</span></a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_analytics') }}" class="analytics"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Analytics</span></a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_workable') }}" class="analytics"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Workable</span></a>
+                </li>                
+            </ul>
+            <div class="clearfix"></div>
+        </nav>
+        <!-- Sidebar Navigation End -->
+    </div>
+    <div class="logo"><img src="/images/logo.png" alt="AdVerto"><img src="/images/logo-small.png" alt="AdVerto" class="logo-small"></div>
+</aside>        <!-- Sidebar End -->

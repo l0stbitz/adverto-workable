@@ -1,0 +1,61 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <h1>Edit Your Information</h1>
+    <div class="float-row" style="min-height: 765px;">
+        <form class="form-horizontal" action="https://thefountaingroup.com/admin/main.php?Todo=editProfile" method="post" id="editProfileData" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="inputName" class="control-label col-xs-2">First Name</label>
+                <div class="col-xs-10"><input type="text" name="first_name" class="form-control" id="inputName" placeholder="First Name" value="Chafic"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="control-label col-xs-2">Last Name</label>
+                <div class="col-xs-10"><input type="text" name="last_name" class="form-control" id="inputName" placeholder="Last Name" value="Abillama"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputTitle" class="control-label col-xs-2">Title</label>
+                <div class="col-xs-10"><input type="text" name="title" class="form-control" id="inputTitle" placeholder="Job Title" value="Managing Director"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="control-label col-xs-2">Password</label>
+                <div class="col-xs-10"><input type="password" name="password" class="form-control" id="inputPassword" placeholder="Enter a Password"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="control-label col-xs-2">Confirm Password</label>
+                <div class="col-xs-10"><input type="password" name="confirm_password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password"></div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="control-label col-xs-2">&nbsp;</label>
+                <div class="col-xs-10">
+                    <div class="fileinputs">
+                        <label class="fakefile" for="real">
+                            <input type="file" name="image" class="file" size="12" id="real">
+                            <div id="fakeDivBtn">
+                                <i>UPLOAD YOUR PHOTO</i>
+                                <span>No file chosen.</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="formats-profile-image">
+                        <small class="formats-profile">Accepted image formats: jpg, gif, png<br>Accepted image weight: &lt; 1MB</small>
+                        <div class="image-events"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <input type="hidden" name="old_image" value="">
+            <div class="btnHolder"><button type="submit" class="btnStyle" name="edit-data">SAVE AND RETURN TO THE MAIN SCREEN</button></div>
+        </form>
+    </div>
+    <!-- Row End -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

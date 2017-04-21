@@ -1,0 +1,47 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+    
+admin_profile:
+    path:     /profile
+    defaults: { _controller: AdminBundle:Default:profile }
+    
+admin_settings:
+    path:     /settings
+    defaults: { _controller: AdminBundle:Default:settings } 
+    
+admin_users:
+    path:     /users
+    defaults: { _controller: AdminBundle:Default:users }
+    
+admin_jmp:
+    path:     /jmp
+    defaults: { _controller: AdminBundle:Default:jmp }    
+    
+admin_report:
+    path:     /report
+    defaults: { _controller: AdminBundle:Default:report }    
+    
+admin_analytics:
+    path:     /analytics
+    defaults: { _controller: AdminBundle:Default:analytics }
+    
+admin_workable:
+    path:     /workable
+    defaults: { _controller: AdminBundle:Workable:index }
+
+admin_workable_search_jobs:
+    path:     /workable/search/jobs
+    defaults: { _controller: AdminBundle:Workable:searchJobs }
+    
+admin_workable_search_job:
+    path:     /workable/job/{id}
+    defaults: { _controller: AdminBundle:Workable:getJob }    
+
+admin_workable_search_job_application_fields:
+    path:     /workable/job/{id}/application_fields
+    defaults: { _controller: AdminBundle:Workable:getJobApplicationFields }
+    
+admin_workable_search_candidates:
+    path:     /workable/search/candidates
+    defaults: { _controller: AdminBundle:Workable:searchCandidates }

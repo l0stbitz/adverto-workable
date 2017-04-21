@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:fb="http://ogp.me/ns/fb#" {% block html_tags %}{% endblock %}>
+    <head prefix="og: http://ogp.me/ns#">
+        <title>{% block title %}Home{% endblock %} | Adverto</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+       
+        {% block stylesheets %}
+            {% include 'AdminBundle:Base:css_assets.html.twig' %}
+        {% endblock %}
+
+        <!--[if lt IE 9]>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Wrapper Start -->
+        <div class="wrapper">
+            <div class="structure-table">
+                {% block sidebar %}
+                    {% include 'AdminBundle:Base:sidebar.html.twig' %}
+                {% endblock %}
+                <!-- Right Section Start -->
+                <div class="right-sec">
+                    {% block header %}
+                        {% include 'AdminBundle:Base:header.html.twig' %}
+                    {% endblock %}
+
+
+                    <!-- Content Section Start -->
+                    <div class="content-section">
+                        <div class="container-liquid">
+                            {% block content %}
+
+                            {% endblock %}
+                        </div>
+                    </div>          <!-- Content Section End -->
+                    <!-- Right Section Footer Start -->
+                    <footer style="width: 921px;">
+                        <ul>
+                            <li>Adverto Inc © 2017</li>
+                            <li>|</li>
+                            <li><a href="https://adverto.co/terms-and-conditions/" target="_blank">Terms &amp; Conditions</a></li>
+                            <li>|</li>
+                            <li><a href="https://adverto.co/privacy-policy/" target="_blank">Privacy Policy</a></li>
+                            <li>|</li>
+                            <li><a href="https://www.adverto.co/" target="_blank">www.adverto.co</a></li>
+                        </ul>
+                    </footer>            <!-- Right Section Footer End -->
+                    <!-- Right Section End -->
+                </div>
+            </div>
+        </div>
+
+
+        {% block javascripts %}
+            {% include 'AdminBundle:Base:js_assets.html.twig' %}
+        {% endblock %}
+    </body>
+</html>
