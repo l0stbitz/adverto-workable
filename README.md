@@ -45,3 +45,4 @@ If you're using Assetic, you'll also want to dump your assets:
 
  php bin/console assetic:dump --env=prod --no-debug
 
+F) Depending on your server deployment, file permissions for the var folder need to be made writeable by php/webserver
