@@ -11,7 +11,7 @@ class WorkableController extends BaseController {
         return $this->_render('AdminBundle:Workable:index.html.twig');
     }
 
-    public function searchCanidatesAction(Request $request, $query = "") {
+    public function searchCandidatesAction(Request $request, $query = "") {
         $start = $request->get('start', 0);
         $limit = $request->get('length', 0);
         $search = $request->get('search', []);
@@ -71,6 +71,10 @@ class WorkableController extends BaseController {
         $response->setMaxAge(60 * 15);
 
         return $response;
+    }
+
+    public function postCandidateAction(Request $request) {
+        
     }
 
 }

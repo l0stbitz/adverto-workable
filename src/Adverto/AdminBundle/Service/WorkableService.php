@@ -56,7 +56,7 @@ class WorkableService {
      */
     public function getJobs($sinceId = false) {
         $jobs = [];
-        $data = [];//['include_fields' => 'industry'];
+        $data = []; //['include_fields' => 'industry'];
         if ($sinceId)
             $data['since_id'] = $sinceId;
         $response = $this->getResponse('jobs', $data);
@@ -123,7 +123,7 @@ class WorkableService {
     }
 
     public function getJobApplicationFieldsFromRedis($jobId, $cached = false) {
-        $key = CS::PREFIX . CS::SP . CS::JOBS . CS::SP . $jobId . CS::SP . CS::APPFIELDS;
+        $key = CS::PREFIX . CS::SP . CS::JOBS . CS::APPFIELDS . CS::SP . $jobId . CS::SP;
         $job = json_decode($this->redis->get($key));
         if ($job && $cached)
             return $job;
@@ -178,29 +178,42 @@ class WorkableService {
      * @return
      */
     public function postCandidate($jobId, $data = []) {
+        //required fields
+        if(!isset($data['name'])){
+            // Throw error or default?
+        }
+        if(!isset($data['firstname'])){
+            // Throw error or default?
+        }
+        if(!isset($data['lastname'])){
+            // Throw error or default?
+        }
+        if(!isset($data['email'])){
+            // Throw error or default?
+        }
+        $params = [
+            "sourced"=>true,
+            "candidate"=>$data
+        ];
 
-        /*
-          {
-          "candidate": {
-          "name": "Jj Botha",
-          "firstname": "Jj",
-          "lastname": "Botha",
-          "headline": "Professional Administration Manager",
-          "summary": "A focussed, results-driven team player with many year experience in the field. Working my way up to management level, I have experience of every aspect of this role. I understand the challenges it brings, and have a proven track record of providing solutions.",
-          "address": "25772 Gustave Shore, Iowa, USA",
-          "phone": "1-859-557-6573",
-          "email": "jj_botha@fakemail.com",
-          "resume": {
-          "name": "jj_botha.doc",
-          "data": "6622116356e175ed0394b0d=="
-          }
-          }
-          }
-         */
+        /*$params = json_decode('{
+  "sourced": true,
+  "candidate": {
+    "name": "J Murphy TESTING",
+    "firstname": "J",
+    "lastname": "MURPHY",
+    "headline": "TESTING",
+    "summary": "A focussed, results-driven team player with many year experience in the field. Working my way up to management level, I have experience of every aspect of this role. I understand the challenges it brings, and have a proven track record of providing solutions.",
+    "address": "25772 Gustave Shore, Iowa, USA",
+    "phone": "1-859-557-6573",
+    "email": "test2@lostbitz.com"}}');*/
+        //$params->shortcode = $jobId;
+        print_r($params);
         //Get response
-        //$response = $this->getResponse('/jobs/'+$jobId+'/candidates', $params, 'POST');
+        $response = $this->getResponse('jobs/' . $jobId . '/candidates/', $params, 'POST');
 
         print_r($response);
+        return $response;
     }
 
     /**

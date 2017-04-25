@@ -17,7 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new UserBundle\UserBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
             new AppBundle\AppBundle(),
             new Adverto\JobSearchBundle\JobSearchBundle(),
             new Adverto\AdminBundle\AdminBundle(),

@@ -4,6 +4,7 @@ namespace Adverto\JobSearchBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Adverto\AdminBundle\Service\RedisService as CS;
 
 class DefaultController extends Controller {
@@ -75,6 +76,26 @@ class DefaultController extends Controller {
         }
         $jobs['info'] = ["numberOfPages" => 2, "totalJobs" => count($jobs['jobs'])];
         $response = new JsonResponse($jobs); //json_decode('{"jobs":[{"title":"Sr. Back-End PHP Web Developer","titleDisplay":"Sr. Back-End PHP Web Developer","category":"Web Development","categoryDisplay":"Web Development","location":"QC - Montreal","locationDisplay":"QC - Montreal","groupLocation":"","url":"https%3A%2F%2Fadverto.co%2Fjobsearch%2Fjob-details%2Fsr-back-end-php-web-developer%2F3%2F","lat":"45.5016889","lng":"-73.56725599999999","distance":null},{"title":"Sr. Front-End Web Developer","titleDisplay":"Sr. Front-End Web Developer","category":"Web Development","categoryDisplay":"Web Development","location":"QC - Montreal","locationDisplay":"QC - Montreal","groupLocation":"","url":"https%3A%2F%2Fadverto.co%2Fjobsearch%2Fjob-details%2Fsr-front-end-web-developer%2F4%2F","lat":"45.5016889","lng":"-73.56725599999999","distance":null},{"title":"Web Integrator","titleDisplay":"Web Integrator","category":"Web Development","categoryDisplay":"Web Development","location":"QC - Montreal","locationDisplay":"QC - Montreal","groupLocation":"","url":"https%3A%2F%2Fadverto.co%2Fjobsearch%2Fjob-details%2Fweb-integrator%2F5%2F","lat":"45.5016889","lng":"-73.56725599999999","distance":null}],"info":{"numberOfPages":1,"totalJobs":"3"}}'));
+        $response->setPublic();
+        // cache for 15 minutes
+        $response->setMaxAge(60 * 15);
+
+        return $response;
+    }
+    
+    public function applyJobAction(Request $request){
+        $wrkSrv = $this->container->get('admin.workable_service');
+        if($request->get('candidate') && $request->get('job')){
+            //try{
+           $res = $wrkSrv->postCandidate($request->get('job')['id'],$request->get('candidate'));
+           print_r($res);
+        }
+        //print_r($data);
+        //Handle form request 
+        //Translate data, format
+        //base64 resume
+        //base64 profile image
+        $response = new JsonResponse($res); 
         $response->setPublic();
         // cache for 15 minutes
         $response->setMaxAge(60 * 15);

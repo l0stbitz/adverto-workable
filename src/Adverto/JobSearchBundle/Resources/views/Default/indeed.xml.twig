@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<source>
+<publisher>Adverto Inc</publisher>
+<publisherurl>https://adverto.co</publisherurl>
+<lastBuildDate>Mon, 28 Nov 2016 10:05:01 GMT</lastBuildDate>
+{% for job in jobs %}
+<job>
+    <title>
+        <![CDATA[ {{ job.title }} ]]>
+    </title>
+    <referencenumber>
+        <![CDATA[ {{ job.id }} ]]>
+    </referencenumber>
+    <category>
+        <![CDATA[ {{ job.industry}} ]]>
+    </category>
+    <date>
+        <![CDATA[ Tue, 10 May 2016 00:00:00 EDT ]]>
+    </date>
+    <city>
+        <![CDATA[ {{ job.location.city }} ]]>
+    </city>
+    <state>
+        <![CDATA[ {{ job.location.region}} ]]>
+    </state>
+    <country>
+        <![CDATA[ CA ]]>
+    </country>
+    <postalcode>
+        <![CDATA[ ]]>
+    </postalcode>
+    <url>
+        <![CDATA[
+        https://adverto.co/jobsearch/job-details/sr-back-end-php-web-developer/3/?utm_campaign=Indeed
+        ]]>
+    </url>
+    <description>
+        <![CDATA[
+            {{ job.description|raw }}
+         ]]>
+    </description>
+</job>
+{% endfor %}
+</source>

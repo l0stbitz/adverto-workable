@@ -5,8 +5,15 @@ job_search_homepage:
 job_search_filtering:
     path:     /filtering
     defaults: { _controller: JobSearchBundle:Default:filtering }    
-
     
 job_search_jobs:
     path:     /jobs
     defaults: { _controller: JobSearchBundle:Default:jobs } 
+    
+job_apply_job:
+    path:     /applyjob
+    defaults: { _controller: JobSearchBundle:Default:applyJob }     
+    
+job_sitemap_indeed:
+    path:     /sitemap/indeed
+    defaults: { _controller: JobSearchBundle:Sitemap:indeed }    

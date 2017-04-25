@@ -1,0 +1,98 @@
+<form class="simple_form js-candidate-form" novalidate="novalidate" id="new_candidate" action="/ajax/jobsearch/applyjob" accept-charset="UTF-8" method="post">
+    <input type="hidden" name="job[id]" value="{{ job.shortcode }}">
+    <section class="section section--borderless">
+        <h6>Personal information</h6>
+        <div class="form-group">
+            <label class="string required control-label form-label " for="candidate_Name"><abbr title="required">*</abbr> Name</label>
+            <div class="form-group bottom">
+                <div class="bottom form-group form-group--half left">
+                    <input class="form-control" placeholder="First name" type="text" name="candidate[firstname]" id="candidate_firstname">
+                </div>
+                <div class="bottom form-group form-group--half right">
+                    <input class="form-control" placeholder="Last name" type="text" name="candidate[lastname]" id="candidate_lastname">
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label class="email required control-label form-label" for="candidate_email"><abbr title="required">*</abbr> Email</label>
+            <input class="form-control" type="email" name="candidate[email]" id="candidate_email">
+            <div data-ui="email-avatar-feedback"></div>
+        </div>
+        <div class="form-group form-group--asf">
+            <label class="country optional control-label form-label" for="candidate">Country</label>
+            <input class="form-control" id="candidate_country" name="candidate[country]" tabindex="-1" type="text">
+        </div>
+        <div class="form-group ">
+            <label class="string optional control-label form-label" for="candidate_headline">Headline</label>
+            <input class="form-control" type="text" name="candidate[headline]" id="candidate_headline">
+        </div>
+        <div class="form-group ">
+            <label class="tel required control-label form-label" for="candidate_phone"><abbr title="required">*</abbr> Phone</label>
+            <input class="form-control" type="tel" name="candidate[phone]" id="candidate_phone">
+        </div>
+        <div class="form-group ">
+            <label class="text required control-label form-label" for="candidate_address"><abbr title="required">*</abbr> Address</label>
+            <textarea rows="1" class="form-control form-control--autosize js-auto-height" name="candidate[address]" id="candidate_address" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 32px;"></textarea>
+        </div>
+        <div class="form-group bottom">
+            <div class="form-group bottom">
+                <label class="form-label">
+                    Photo
+                </label>
+                <div class="form-text">
+                    <div class="js-avatar-cache">
+                    </div>
+                    <div class="hide js-uploaded-photo">
+                        <div class="photo-wrapper photo-wrapper--inline">
+                            <div class="photo js-photo"></div>
+                        </div>
+                        <a id="remove_avatar_link" class="btn btn--delete" href="#">Delete photo</a>
+                    </div>
+                    <div class="js-upload-photo-controls">
+                        <a id="upload_avatar_link" data-toggle="modal" data-target="#avatar-modal" href="#">Upload photo</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="section">
+        <h6>Your Profile</h6>
+        <div class="form-group">
+            <label class="form-label">Education</label>
+            <div class="form-text">
+                <a class="add_nested_fields" data-association="educations" href="javascript:void(0)">Add education</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Experience</label>
+            <div class="form-text">
+                <a class="add_nested_fields" data-association="experiences" href="javascript:void(0)">Add experience</a>
+            </div>
+        </div>
+        <div class="form-group ">
+            <label class="text optional control-label form-label" for="candidate_summary">Summary</label>
+            <textarea class="form-control js-auto-height" rows="4" name="candidate[summary]" id="candidate_summary" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 86px;"></textarea>
+        </div>
+        <div class="form-group bottom" id="resume_cache">
+            <label class="form-label">
+                Resume
+            </label>
+            <div class="form-text">
+                <input type="hidden" name="resume_cache_token" id="resume_cache_token">
+                <a data-toggle="modal" class="" href="#resume-modal">Upload resume</a>
+            </div>
+
+        </div>
+    </section>
+    <section class="section">
+        <h6>Application Details</h6>
+        <div class="form-group ">
+            <label class="text optional control-label form-label" for="candidate_cover_letter">Cover letter</label>
+            <textarea class="form-control js-auto-height" rows="4" name="candidate[cover_letter]" id="candidate_cover_letter" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 86px;"></textarea>
+        </div>
+    </section>
+    <section class="section section--cta">
+        <input type="submit" name="commit" value="Submit your application" class="btn btn btn--large btn--primary" data-disable-with="Submitting...">
+    </section>
+</form>                 
