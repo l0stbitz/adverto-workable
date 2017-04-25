@@ -8,11 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="User", indexes={@ORM\Index(name="account_status", columns={"status"})})
+ * @ORM\Table(name="user", indexes={@ORM\Index(name="account_status", columns={"status"})})
  * @ORM\Entity
  */
-class User extends BaseUser
-{
+class User extends BaseUser {
 
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
@@ -23,7 +22,7 @@ class User extends BaseUser
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -135,12 +134,67 @@ class User extends BaseUser
     private $updatedAt = 0;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="user_registered", type="datetime", nullable=true)
+     */
+    private $userRegistered = '0000-00-00 00:00:00';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_role_id", type="integer", nullable=false)
+     */
+    private $userRoleId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="user_last_login", type="datetime", nullable=true)
+     */
+    private $userLastLogin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_reset_secret", type="string", length=255, nullable=true)
+     */
+    private $userResetSecret;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="user_reset_secret_expire", type="datetime", nullable=true)
+     */
+    private $userResetSecretExpire;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip_address", type="string", length=20, nullable=true)
+     */
+    private $ipAddress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
+    private $image;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active;
+
+    /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -149,8 +203,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
@@ -161,8 +214,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setFirstName($firstName)
-    {
+    public function setFirstName($firstName) {
         $this->firstName = $firstName;
 
         return $this;
@@ -173,8 +225,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getFirstName()
-    {
+    public function getFirstName() {
         return $this->firstName;
     }
 
@@ -185,8 +236,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setLastName($lastName)
-    {
+    public function setLastName($lastName) {
         $this->lastName = $lastName;
 
         return $this;
@@ -197,8 +247,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getLastName()
-    {
+    public function getLastName() {
         return $this->lastName;
     }
 
@@ -209,8 +258,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setLocation($location)
-    {
+    public function setLocation($location) {
         $this->location = $location;
 
         return $this;
@@ -221,8 +269,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getLocation()
-    {
+    public function getLocation() {
         return $this->location;
     }
 
@@ -233,8 +280,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setCoords($coords)
-    {
+    public function setCoords($coords) {
         $this->coords = $coords;
 
         return $this;
@@ -245,8 +291,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getCoords()
-    {
+    public function getCoords() {
         return $this->coords;
     }
 
@@ -257,8 +302,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setAvatar($avatar)
-    {
+    public function setAvatar($avatar) {
         $this->avatar = $avatar;
 
         return $this;
@@ -269,8 +313,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getAvatar()
-    {
+    public function getAvatar() {
         return $this->avatar;
     }
 
@@ -281,8 +324,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setCompanyName($companyName)
-    {
+    public function setCompanyName($companyName) {
         $this->companyName = $companyName;
 
         return $this;
@@ -293,8 +335,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getCompanyName()
-    {
+    public function getCompanyName() {
         return $this->companyName;
     }
 
@@ -305,8 +346,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setCompanySize($companySize)
-    {
+    public function setCompanySize($companySize) {
         $this->companySize = $companySize;
 
         return $this;
@@ -317,8 +357,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getCompanySize()
-    {
+    public function getCompanySize() {
         return $this->companySize;
     }
 
@@ -329,8 +368,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setCompanyLogo($companyLogo)
-    {
+    public function setCompanyLogo($companyLogo) {
         $this->companyLogo = $companyLogo;
 
         return $this;
@@ -341,8 +379,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getCompanyLogo()
-    {
+    public function getCompanyLogo() {
         return $this->companyLogo;
     }
 
@@ -353,8 +390,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
 
         return $this;
@@ -365,8 +401,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
@@ -377,8 +412,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setMailAccessedAt($mailAccessedAt)
-    {
+    public function setMailAccessedAt($mailAccessedAt) {
         $this->mailAccessedAt = $mailAccessedAt;
 
         return $this;
@@ -389,8 +423,7 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getMailAccessedAt()
-    {
+    public function getMailAccessedAt() {
         return $this->mailAccessedAt;
     }
 
@@ -401,8 +434,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setWizard($wizard)
-    {
+    public function setWizard($wizard) {
         $this->wizard = $wizard;
 
         return $this;
@@ -413,8 +445,7 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getWizard()
-    {
+    public function getWizard() {
         return $this->wizard;
     }
 
@@ -425,8 +456,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setIndustries($industries)
-    {
+    public function setIndustries($industries) {
         $this->industries = $industries;
 
         return $this;
@@ -437,8 +467,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getIndustries()
-    {
+    public function getIndustries() {
         return $this->industries;
     }
 
@@ -449,8 +478,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setStatus($status)
-    {
+    public function setStatus($status) {
         $this->status = $status;
 
         return $this;
@@ -461,8 +489,7 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
 
@@ -473,8 +500,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
 
         return $this;
@@ -485,8 +511,7 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -497,8 +522,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
 
         return $this;
@@ -509,8 +533,7 @@ class User extends BaseUser
      *
      * @return integer
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
@@ -518,8 +541,7 @@ class User extends BaseUser
      * 
      * @return array
      */
-    public function toArray()
-    {
+    public function toArray() {
         $arr = [];
         $arr['id'] = $this->getId();
         $arr['avatar'] = $this->getAvatar();
