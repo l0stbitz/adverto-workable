@@ -1,0 +1,14 @@
+admin_jmp_job_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\Job:show" }
+    methods:  GET
+
+admin_jmp_job_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\Job:new" }
+    methods:  [GET, POST]
+
+admin_jmp_job_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\Job:delete" }
+    methods:  DELETE

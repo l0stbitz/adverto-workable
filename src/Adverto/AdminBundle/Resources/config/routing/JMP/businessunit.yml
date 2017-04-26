@@ -1,0 +1,19 @@
+admin_jmp_business_unit_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:index" }
+    methods:  GET
+
+admin_jmp_business_unit_show:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:show" }
+    methods:  GET
+
+admin_jmp_business_unit_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:new" }
+    methods:  [GET, POST]
+
+admin_jmp_business_unit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:delete" }
+    methods:  DELETE

@@ -29,20 +29,20 @@ class Country
     /**
      * @var integer
      *
-     * @ORM\Column(name="location_id", type="bigint")
+     * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $locationId;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country_abv", type="string", length=5)
+     * @ORM\Column(name="abv", type="string", length=5)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $countryAbv;
+    private $abv;
 
     /**
      * Set countryName
@@ -93,50 +93,50 @@ class Country
     }
 
     /**
-     * Set locationId
+     * Set id
      *
-     * @param integer $locationId
+     * @param integer $id
      *
      * @return Country
      */
-    public function setLocationId($locationId)
+    public function setId($id)
     {
-        $this->locationId = $locationId;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get locationId
+     * Get id
      *
      * @return integer
      */
-    public function getLocationId()
+    public function getId()
     {
-        return $this->locationId;
+        return $this->id;
     }
 
     /**
-     * Set countryAbv
+     * Set abv
      *
-     * @param string $countryAbv
+     * @param string $abv
      *
      * @return Country
      */
-    public function setCountryAbv($countryAbv)
+    public function setAbv($abv)
     {
-        $this->countryAbv = $countryAbv;
+        $this->abv = $abv;
 
         return $this;
     }
 
     /**
-     * Get countryAbv
+     * Get abv
      *
      * @return string
      */
-    public function getCountryAbv()
+    public function getAbv()
     {
-        return $this->countryAbv;
+        return $this->abv;
     }
 }

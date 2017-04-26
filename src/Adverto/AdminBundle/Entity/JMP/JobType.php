@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_job_types")
  * @ORM\Entity
  */
-class JobType
-{
-    
+class JobType {
+
     /**
      * @var integer
      *
@@ -25,165 +24,158 @@ class JobType
     /**
      * @var string
      *
-     * @ORM\Column(name="job_type_name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $jobTypeName;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_type_user_modified", type="bigint", nullable=true)
+     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
      */
-    private $jobTypeUserModified;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="job_type_date_modified", type="datetime", nullable=true)
-     */
-    private $jobTypeDateModified = 'CURRENT_TIMESTAMP';
+    private $userModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_type_position", type="bigint", nullable=true)
+     * @ORM\Column(name="date_modified", type="integer", nullable=true)
      */
-    private $jobTypePosition;
+    private $dateModified = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="bigint", nullable=true)
+     */
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="job_type_active", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
-    private $jobTypeActive = '1';
-
-    /**
-     * Set jobTypeName
-     *
-     * @param string $jobTypeName
-     *
-     * @return JobType
-     */
-    public function setJobTypeName($jobTypeName)
-    {
-        $this->jobTypeName = $jobTypeName;
-
-        return $this;
-    }
-
-    /**
-     * Get jobTypeName
-     *
-     * @return string
-     */
-    public function getJobTypeName()
-    {
-        return $this->jobTypeName;
-    }
-
-    /**
-     * Set jobTypeUserModified
-     *
-     * @param integer $jobTypeUserModified
-     *
-     * @return JobType
-     */
-    public function setJobTypeUserModified($jobTypeUserModified)
-    {
-        $this->jobTypeUserModified = $jobTypeUserModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobTypeUserModified
-     *
-     * @return integer
-     */
-    public function getJobTypeUserModified()
-    {
-        return $this->jobTypeUserModified;
-    }
-
-    /**
-     * Set jobTypeDateModified
-     *
-     * @param \DateTime $jobTypeDateModified
-     *
-     * @return JobType
-     */
-    public function setJobTypeDateModified($jobTypeDateModified)
-    {
-        $this->jobTypeDateModified = $jobTypeDateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobTypeDateModified
-     *
-     * @return \DateTime
-     */
-    public function getJobTypeDateModified()
-    {
-        return $this->jobTypeDateModified;
-    }
-
-    /**
-     * Set jobTypePosition
-     *
-     * @param integer $jobTypePosition
-     *
-     * @return JobType
-     */
-    public function setJobTypePosition($jobTypePosition)
-    {
-        $this->jobTypePosition = $jobTypePosition;
-
-        return $this;
-    }
-
-    /**
-     * Get jobTypePosition
-     *
-     * @return integer
-     */
-    public function getJobTypePosition()
-    {
-        return $this->jobTypePosition;
-    }
-
-    /**
-     * Set jobTypeActive
-     *
-     * @param boolean $jobTypeActive
-     *
-     * @return JobType
-     */
-    public function setJobTypeActive($jobTypeActive)
-    {
-        $this->jobTypeActive = $jobTypeActive;
-
-        return $this;
-    }
-
-    /**
-     * Get jobTypeActive
-     *
-     * @return boolean
-     */
-    public function getJobTypeActive()
-    {
-        return $this->jobTypeActive;
-    }
+    private $active = '1';
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getJobTypeId()
-    {
+    public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return JobType
+     */
+    public function setName($name) {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set userModified
+     *
+     * @param integer $userModified
+     *
+     * @return JobType
+     */
+    public function setUserModified($userModified) {
+        $this->userModified = $userModified;
+
+        return $this;
+    }
+
+    /**
+     * Get userModified
+     *
+     * @return integer
+     */
+    public function getUserModified() {
+        return $this->userModified;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param integer $dateModified
+     *
+     * @return JobType
+     */
+    public function setDateModified($dateModified) {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return integer
+     */
+    public function getDateModified() {
+        return $this->dateModified;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return JobType
+     */
+    public function setPosition($position) {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return JobType
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function __toString() {
+        return $this->getName();
     }
 }

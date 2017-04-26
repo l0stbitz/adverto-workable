@@ -1,0 +1,61 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="content-section jmp">
+        <div class="container-liquid">
+            {% include 'AdminBundle:JMP:Base/sidebar.html.twig' %}       
+            <div class="float-row-smaller listingPages">
+                <h1>Dashboard</h1>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="dashboard-circle">
+                        <strong>1</strong>
+                        All Time Jobs
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="dashboard-circle">
+                        <strong>2</strong>
+                        All time Applications
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="col-xs-12">
+                    <h3 class="sectionTitle">Latest Jobs Posted</h3>
+                </div>
+                <div class="col-xs-12">
+                    <a href="{{ path('admin_jmp_job_new') }}" class="createBtn pull-right">POST A NEW JOB</a>
+                </div>	       
+                <div class="col-xs-12">
+                    <table class="table table-striped table-bordered table-hover listing-dataTable" id="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>End Date</th>
+                                <th>Job Id</th>
+                                <th>Title</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-12">
+                    <a href="{{ path('admin_jmp_job_new') }}" class="createBtn pull-right">POST A NEW JOB</a>
+                </div>	
+            </div>
+            <!-- Row End -->
+        </div>
+    </div> 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

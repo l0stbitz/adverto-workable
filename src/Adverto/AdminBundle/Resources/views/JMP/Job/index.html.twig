@@ -1,0 +1,94 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+
+{% block title %}Jobs{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <h1>Jobs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Businessunitid</th>
+                <th>Userid</th>
+                <th>Reqid</th>
+                <th>Title</th>
+                <th>Titleseo</th>
+                <th>Locationid</th>
+                <th>Categoryid</th>
+                <th>Jobtypeid</th>
+                <th>Jobstatusid</th>
+                <th>Yearsofexperienceid</th>
+                <th>Careerlevelid</th>
+                <th>Educationlevelid</th>
+                <th>Salaryfrom</th>
+                <th>Salaryto</th>
+                <th>Salarytypeid</th>
+                <th>Description</th>
+                <th>Applyemails</th>
+                <th>Applystart</th>
+                <th>Applyfinish</th>
+                <th>Views</th>
+                <th>Dateposted</th>
+                <th>Startdate</th>
+                <th>Enddate</th>
+                <th>Active</th>
+                <th>Ipaddress</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td><a href="{{ path('job_show', { 'id': job.id }) }}">{{ job.id }}</a></td>
+                <td>{{ job.businessUnitId }}</td>
+                <td>{{ job.userId }}</td>
+                <td>{{ job.reqId }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.titleSeo }}</td>
+                <td>{{ job.locationId }}</td>
+                <td>{{ job.categoryId }}</td>
+                <td>{{ job.jobTypeId }}</td>
+                <td>{{ job.jobStatusId }}</td>
+                <td>{{ job.yearsOfExperienceId }}</td>
+                <td>{{ job.careerLevelId }}</td>
+                <td>{{ job.educationLevelId }}</td>
+                <td>{{ job.salaryFrom }}</td>
+                <td>{{ job.salaryTo }}</td>
+                <td>{{ job.salaryTypeId }}</td>
+                <td>{{ job.description }}</td>
+                <td>{{ job.applyEmails }}</td>
+                <td>{{ job.applyStart }}</td>
+                <td>{{ job.applyFinish }}</td>
+                <td>{{ job.views }}</td>
+                <td>{{ job.datePosted }}</td>
+                <td>{{ job.startDate }}</td>
+                <td>{{ job.endDate }}</td>
+                <td>{% if job.active %}Yes{% else %}No{% endif %}</td>
+                <td>{{ job.ipAddress }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_job_show', { 'id': job.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_job_edit', { 'id': job.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_job_new') }}">Create a new job</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_category")
  * @ORM\Entity
  */
-class Category
-{
-    
+class Category {
+
     /**
      * @var integer
      *
@@ -63,17 +62,16 @@ class Category
      * @ORM\Column(name="active", type="boolean", nullable=true)
      */
     private $active = 1;
-    
+
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     /**
      * Set name
      *
@@ -81,8 +79,7 @@ class Category
      *
      * @return Category
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -93,8 +90,7 @@ class Category
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -105,8 +101,7 @@ class Category
      *
      * @return Category
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
 
         return $this;
@@ -117,8 +112,7 @@ class Category
      *
      * @return string
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -129,8 +123,7 @@ class Category
      *
      * @return Category
      */
-    public function setUserModified($userModified)
-    {
+    public function setUserModified($userModified) {
         $this->userModified = $userModified;
 
         return $this;
@@ -141,8 +134,7 @@ class Category
      *
      * @return integer
      */
-    public function getUserModified()
-    {
+    public function getUserModified() {
         return $this->userModified;
     }
 
@@ -153,8 +145,7 @@ class Category
      *
      * @return Category
      */
-    public function setDateModified($dateModified)
-    {
+    public function setDateModified($dateModified) {
         $this->dateModified = $dateModified;
 
         return $this;
@@ -165,8 +156,7 @@ class Category
      *
      * @return integer
      */
-    public function getDateModified()
-    {
+    public function getDateModified() {
         return $this->dateModified;
     }
 
@@ -177,8 +167,7 @@ class Category
      *
      * @return Category
      */
-    public function setPosition($position)
-    {
+    public function setPosition($position) {
         $this->position = $position;
 
         return $this;
@@ -189,8 +178,7 @@ class Category
      *
      * @return integer
      */
-    public function getPosition()
-    {
+    public function getPosition() {
         return $this->position;
     }
 
@@ -201,8 +189,7 @@ class Category
      *
      * @return Category
      */
-    public function setActive($active)
-    {
+    public function setActive($active) {
         $this->active = $active;
 
         return $this;
@@ -213,8 +200,12 @@ class Category
      *
      * @return boolean
      */
-    public function getActive()
-    {
+    public function getActive() {
         return $this->active;
     }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
 }

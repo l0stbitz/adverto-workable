@@ -1,3 +1,15 @@
+admin_api_job:
+    resource: "@AdminBundle/Resources/config/routing/API/job.yml"
+    prefix:   /api/job
+
+admin_jmp_job:
+    resource: "@AdminBundle/Resources/config/routing/JMP/job.yml"
+    prefix:   /jmp/job
+    
+admin_jmp_business_unit:
+    resource: "@AdminBundle/Resources/config/routing/JMP/businessunit.yml"
+    prefix:   /jmp/businessunit    
+    
 admin_homepage:
     path:     /
     defaults: { _controller: AdminBundle:Default:index }

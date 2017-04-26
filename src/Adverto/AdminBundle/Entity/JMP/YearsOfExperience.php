@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_job_years_of_experience")
  * @ORM\Entity
  */
-class YearsOfExperience
-{
-    
+class YearsOfExperience {
+
     /**
      * @var integer
      *
@@ -25,165 +24,159 @@ class YearsOfExperience
     /**
      * @var string
      *
-     * @ORM\Column(name="job_years_of_experience_name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $jobYearsOfExperienceName;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_years_of_experience_user_modified", type="bigint", nullable=true)
+     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
      */
-    private $jobYearsOfExperienceUserModified;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="job_years_of_experience_date_modified", type="datetime", nullable=true)
-     */
-    private $jobYearsOfExperienceDateModified = 'CURRENT_TIMESTAMP';
+    private $userModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_years_of_experience_position", type="bigint", nullable=true)
+     * @ORM\Column(name="date_modified", type="integer", nullable=true)
      */
-    private $jobYearsOfExperiencePosition;
+    private $dateModified = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="bigint", nullable=true)
+     */
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="job_years_of_experience_active", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
-    private $jobYearsOfExperienceActive = '1';
-
-    /**
-     * Set jobYearsOfExperienceName
-     *
-     * @param string $jobYearsOfExperienceName
-     *
-     * @return YearsOfExperience
-     */
-    public function setYearsOfExperienceName($jobYearsOfExperienceName)
-    {
-        $this->jobYearsOfExperienceName = $jobYearsOfExperienceName;
-
-        return $this;
-    }
-
-    /**
-     * Get jobYearsOfExperienceName
-     *
-     * @return string
-     */
-    public function getYearsOfExperienceName()
-    {
-        return $this->jobYearsOfExperienceName;
-    }
-
-    /**
-     * Set jobYearsOfExperienceUserModified
-     *
-     * @param integer $jobYearsOfExperienceUserModified
-     *
-     * @return YearsOfExperience
-     */
-    public function setYearsOfExperienceUserModified($jobYearsOfExperienceUserModified)
-    {
-        $this->jobYearsOfExperienceUserModified = $jobYearsOfExperienceUserModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobYearsOfExperienceUserModified
-     *
-     * @return integer
-     */
-    public function getYearsOfExperienceUserModified()
-    {
-        return $this->jobYearsOfExperienceUserModified;
-    }
-
-    /**
-     * Set jobYearsOfExperienceDateModified
-     *
-     * @param \DateTime $jobYearsOfExperienceDateModified
-     *
-     * @return YearsOfExperience
-     */
-    public function setYearsOfExperienceDateModified($jobYearsOfExperienceDateModified)
-    {
-        $this->jobYearsOfExperienceDateModified = $jobYearsOfExperienceDateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobYearsOfExperienceDateModified
-     *
-     * @return \DateTime
-     */
-    public function getYearsOfExperienceDateModified()
-    {
-        return $this->jobYearsOfExperienceDateModified;
-    }
-
-    /**
-     * Set jobYearsOfExperiencePosition
-     *
-     * @param integer $jobYearsOfExperiencePosition
-     *
-     * @return YearsOfExperience
-     */
-    public function setYearsOfExperiencePosition($jobYearsOfExperiencePosition)
-    {
-        $this->jobYearsOfExperiencePosition = $jobYearsOfExperiencePosition;
-
-        return $this;
-    }
-
-    /**
-     * Get jobYearsOfExperiencePosition
-     *
-     * @return integer
-     */
-    public function getYearsOfExperiencePosition()
-    {
-        return $this->jobYearsOfExperiencePosition;
-    }
-
-    /**
-     * Set jobYearsOfExperienceActive
-     *
-     * @param boolean $jobYearsOfExperienceActive
-     *
-     * @return YearsOfExperience
-     */
-    public function setYearsOfExperienceActive($jobYearsOfExperienceActive)
-    {
-        $this->jobYearsOfExperienceActive = $jobYearsOfExperienceActive;
-
-        return $this;
-    }
-
-    /**
-     * Get jobYearsOfExperienceActive
-     *
-     * @return boolean
-     */
-    public function getYearsOfExperienceActive()
-    {
-        return $this->jobYearsOfExperienceActive;
-    }
+    private $active = 1;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getYearsOfExperienceId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return YearsOfExperience
+     */
+    public function setName($name) {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set userModified
+     *
+     * @param integer $userModified
+     *
+     * @return YearsOfExperience
+     */
+    public function setUserModified($userModified) {
+        $this->userModified = $userModified;
+
+        return $this;
+    }
+
+    /**
+     * Get userModified
+     *
+     * @return integer
+     */
+    public function getUserModified() {
+        return $this->userModified;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param integer $dateModified
+     *
+     * @return YearsOfExperience
+     */
+    public function setDateModified($dateModified) {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return integer
+     */
+    public function getDateModified() {
+        return $this->dateModified;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return YearsOfExperience
+     */
+    public function setPosition($position) {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return YearsOfExperience
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
 }

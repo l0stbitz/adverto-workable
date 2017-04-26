@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_job_career_level")
  * @ORM\Entity
  */
-class CareerLevel
-{
-    
+class CareerLevel {
+
     /**
      * @var integer
      *
@@ -25,165 +24,159 @@ class CareerLevel
     /**
      * @var string
      *
-     * @ORM\Column(name="job_career_level_name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $jobCareerLevelName;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_career_level_user_modified", type="bigint", nullable=true)
+     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
      */
-    private $jobCareerLevelUserModified;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="job_career_level_date_modified", type="datetime", nullable=true)
-     */
-    private $jobCareerLevelDateModified = 'CURRENT_TIMESTAMP';
+    private $userModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_career_level_position", type="bigint", nullable=true)
+     * @ORM\Column(name="date_modified", type="integer", nullable=true)
      */
-    private $jobCareerLevelPosition;
+    private $dateModified = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="bigint", nullable=true)
+     */
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="job_career_level_active", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
-    private $jobCareerLevelActive = '1';
-
-    /**
-     * Set jobCareerLevelName
-     *
-     * @param string $jobCareerLevelName
-     *
-     * @return CareerLevel
-     */
-    public function setCareerLevelName($jobCareerLevelName)
-    {
-        $this->jobCareerLevelName = $jobCareerLevelName;
-
-        return $this;
-    }
-
-    /**
-     * Get jobCareerLevelName
-     *
-     * @return string
-     */
-    public function getCareerLevelName()
-    {
-        return $this->jobCareerLevelName;
-    }
-
-    /**
-     * Set jobCareerLevelUserModified
-     *
-     * @param integer $jobCareerLevelUserModified
-     *
-     * @return CareerLevel
-     */
-    public function setCareerLevelUserModified($jobCareerLevelUserModified)
-    {
-        $this->jobCareerLevelUserModified = $jobCareerLevelUserModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobCareerLevelUserModified
-     *
-     * @return integer
-     */
-    public function getCareerLevelUserModified()
-    {
-        return $this->jobCareerLevelUserModified;
-    }
-
-    /**
-     * Set jobCareerLevelDateModified
-     *
-     * @param \DateTime $jobCareerLevelDateModified
-     *
-     * @return CareerLevel
-     */
-    public function setCareerLevelDateModified($jobCareerLevelDateModified)
-    {
-        $this->jobCareerLevelDateModified = $jobCareerLevelDateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobCareerLevelDateModified
-     *
-     * @return \DateTime
-     */
-    public function getCareerLevelDateModified()
-    {
-        return $this->jobCareerLevelDateModified;
-    }
-
-    /**
-     * Set jobCareerLevelPosition
-     *
-     * @param integer $jobCareerLevelPosition
-     *
-     * @return CareerLevel
-     */
-    public function setCareerLevelPosition($jobCareerLevelPosition)
-    {
-        $this->jobCareerLevelPosition = $jobCareerLevelPosition;
-
-        return $this;
-    }
-
-    /**
-     * Get jobCareerLevelPosition
-     *
-     * @return integer
-     */
-    public function getCareerLevelPosition()
-    {
-        return $this->jobCareerLevelPosition;
-    }
-
-    /**
-     * Set jobCareerLevelActive
-     *
-     * @param boolean $jobCareerLevelActive
-     *
-     * @return CareerLevel
-     */
-    public function setCareerLevelActive($jobCareerLevelActive)
-    {
-        $this->jobCareerLevelActive = $jobCareerLevelActive;
-
-        return $this;
-    }
-
-    /**
-     * Get jobCareerLevelActive
-     *
-     * @return boolean
-     */
-    public function getCareerLevelActive()
-    {
-        return $this->jobCareerLevelActive;
-    }
+    private $active = 1;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getCareerLevelId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return CareerLevel
+     */
+    public function setName($name) {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set userModified
+     *
+     * @param integer $userModified
+     *
+     * @return CareerLevel
+     */
+    public function setUserModified($userModified) {
+        $this->userModified = $userModified;
+
+        return $this;
+    }
+
+    /**
+     * Get userModified
+     *
+     * @return integer
+     */
+    public function getUserModified() {
+        return $this->userModified;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param integer $dateModified
+     *
+     * @return CareerLevel
+     */
+    public function setDateModified($dateModified) {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return integer
+     */
+    public function getDateModified() {
+        return $this->dateModified;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return CareerLevel
+     */
+    public function setPosition($position) {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return CareerLevel
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
 }

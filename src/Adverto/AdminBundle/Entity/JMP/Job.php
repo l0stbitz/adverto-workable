@@ -257,7 +257,7 @@ class Job {
      *
      * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $active = 1;
+    private $active = true;
 
     /**
      * @var string
@@ -265,6 +265,20 @@ class Job {
      * @ORM\Column(name="ip_address", type="string", length=20, nullable=false)
      */
     private $ipAddress;
+
+    /**
+     * 
+     * @ORM\ManyToMany(targetEntity="CareerArea")
+     * @ORM\JoinTable(name="advj_jobs_career_area_ass",
+     *      joinColumns={@ORM\JoinColumn(name="job_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="careerarea_id", referencedColumnName="id")}
+     *      )
+     */
+    private $careerAreas;
+
+    public function __construct() {
+        $this->careerAreas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -298,6 +312,28 @@ class Job {
     }
 
     /**
+     * Set businessUnit
+     *
+     * @param integer $businessUnit
+     *
+     * @return Job
+     */
+    public function setBusinessUnit($businessUnit) {
+        $this->businessUnit = $businessUnit;
+
+        return $this;
+    }
+
+    /**
+     * Get businessUnit
+     *
+     * @return integer
+     */
+    public function getBusinessUnit() {
+        return $this->businessUnit;
+    }
+
+    /**
      * Set userId
      *
      * @param integer $userId
@@ -317,6 +353,28 @@ class Job {
      */
     public function getUserId() {
         return $this->userId;
+    }
+
+    /**
+     * Set user
+     *
+     * @param integer $user
+     *
+     * @return Job
+     */
+    public function setUser($user) {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return integer
+     */
+    public function getUser() {
+        return $this->user;
     }
 
     /**
@@ -408,6 +466,28 @@ class Job {
     }
 
     /**
+     * Set location
+     *
+     * @param integer $location
+     *
+     * @return Job
+     */
+    public function setLocation($location) {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return integer
+     */
+    public function getLocation() {
+        return $this->location;
+    }
+
+    /**
      * Set category
      *
      * @param integer $categoryId
@@ -427,6 +507,28 @@ class Job {
      */
     public function getCategoryId() {
         return $this->categoryId;
+    }
+
+    /**
+     * Set category
+     *
+     * @param integer $category
+     *
+     * @return Job
+     */
+    public function setCategory($category) {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return integer
+     */
+    public function getCategory() {
+        return $this->category;
     }
 
     /**
@@ -452,6 +554,28 @@ class Job {
     }
 
     /**
+     * Set jobType
+     *
+     * @param integer $jobType
+     *
+     * @return Job
+     */
+    public function setJobType($jobType) {
+        $this->jobType = $jobType;
+
+        return $this;
+    }
+
+    /**
+     * Get jobType
+     *
+     * @return integer
+     */
+    public function getJobType() {
+        return $this->jobType;
+    }
+
+    /**
      * Set jobStatusId
      *
      * @param integer $jobStatusId
@@ -471,6 +595,28 @@ class Job {
      */
     public function getJobStatusId() {
         return $this->jobStatusId;
+    }
+
+    /**
+     * Set jobStatus
+     *
+     * @param integer $jobStatus
+     *
+     * @return Job
+     */
+    public function setJobStatus($jobStatus) {
+        $this->jobStatus = $jobStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get jobStatus
+     *
+     * @return integer
+     */
+    public function getJobStatus() {
+        return $this->jobStatus;
     }
 
     /**
@@ -496,6 +642,28 @@ class Job {
     }
 
     /**
+     * Set yearsOfExperience
+     *
+     * @param integer $yearsOfExperience
+     *
+     * @return Job
+     */
+    public function setYearsOfExperience($yearsOfExperience) {
+        $this->yearsOfExperience = $yearsOfExperience;
+
+        return $this;
+    }
+
+    /**
+     * Get yearsOfExperience
+     *
+     * @return integer
+     */
+    public function getYearsOfExperience() {
+        return $this->yearsOfExperience;
+    }
+
+    /**
      * Set careerLevelId
      *
      * @param integer $careerLevelId
@@ -515,6 +683,32 @@ class Job {
      */
     public function getCareerLevelId() {
         return $this->careerLevelId;
+    }
+
+    public function __call($name, $arguments) {
+        ;
+    }
+
+    /**
+     * Set careerLevel
+     *
+     * @param integer $careerLevel
+     *
+     * @return Job
+     */
+    public function setCareerLevel($careerLevel) {
+        $this->careerLevel = $careerLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get careerLevel
+     *
+     * @return integer
+     */
+    public function getCareerLevel() {
+        return $this->careerLevel;
     }
 
     /**
@@ -537,6 +731,28 @@ class Job {
      */
     public function getEducationLevelId() {
         return $this->educationLevelId;
+    }
+
+    /**
+     * Set educationLevel
+     *
+     * @param integer $educationLevel
+     *
+     * @return Job
+     */
+    public function setEducationLevel($educationLevel) {
+        $this->educationLevel = $educationLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get educationLevel
+     *
+     * @return integer
+     */
+    public function getEducationLevel() {
+        return $this->educationLevel;
     }
 
     /**
@@ -603,6 +819,28 @@ class Job {
      */
     public function getSalaryTypeId() {
         return $this->salaryTypeId;
+    }
+
+    /**
+     * Set salaryType
+     *
+     * @param integer $salaryType
+     *
+     * @return Job
+     */
+    public function setSalaryType($salaryType) {
+        $this->salaryType = $salaryType;
+
+        return $this;
+    }
+
+    /**
+     * Get salaryType
+     *
+     * @return integer
+     */
+    public function getSalaryType() {
+        return $this->salaryType;
     }
 
     /**
@@ -823,6 +1061,28 @@ class Job {
      */
     public function getIpAddress() {
         return $this->ipAddress;
+    }
+
+    /**
+     * Set careerArea
+     *
+     * @param integer $careerAreas
+     *
+     * @return Job
+     */
+    public function setCareerAreas($careerAreas) {
+        $this->careerAreas = $careerAreas;
+
+        return $this;
+    }
+
+    /**
+     * Get careerAreas
+     *
+     * @return integer
+     */
+    public function getCareerAreas() {
+        return $this->careerAreas;
     }
 
 }

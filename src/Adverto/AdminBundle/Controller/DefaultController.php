@@ -26,7 +26,7 @@ class DefaultController extends BaseController
     
     public function jmpAction()
     {
-        return $this->_render('AdminBundle:Default:index.html.twig');
+        return $this->_render('AdminBundle:Default:jmp.html.twig');
     }    
     
         

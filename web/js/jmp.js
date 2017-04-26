@@ -10,30 +10,18 @@ $(document).ready(function(){
             pageLength: 20,
             order: [[ 0, "desc" ]],
             ajax: {
-                "url": "./jmp/ajax/getLatestJobs.php",
+                "url": "/admin/api/job",
                 "type": "GET",
                 "dataSrc": ""
             },
             "deferRender": true,
             columns: [
-                {"data": "Start Date"},
-                {
-                    "data": "End Date",
-                    // "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    //     if(sData != null) {
-                    //         var today_date = new Date();
-                    //         var job_date = new Date(sData);
-                    //         if (today_date.getTime() > job_date.getTime()) {
-                    //             $(nTd).addClass("red");
-                    //         }
-                    //     }
-                    // }
-                },
-                {"data": "Job Id"},
-                {"data": "Job Title"},
-                {"data": "Location"},
-                {"data": "Status"},
-                {"data": "Actions", "orderable": false}
+                {"data": "endDate"},
+                {"data": "id"},
+                {"data": "title"},
+                {"data": "location"},
+                {"data": "jobStatus"},
+                {"data": "id", "render": ""}
             ],
             dom: 'ftip',
             initComplete: function () {

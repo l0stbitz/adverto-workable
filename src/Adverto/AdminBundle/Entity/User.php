@@ -134,60 +134,11 @@ class User extends BaseUser {
     private $updatedAt = 0;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="user_registered", type="datetime", nullable=true)
-     */
-    private $userRegistered = '0000-00-00 00:00:00';
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="user_role_id", type="integer", nullable=false)
-     */
-    private $userRoleId;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="user_last_login", type="datetime", nullable=true)
-     */
-    private $userLastLogin;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="user_reset_secret", type="string", length=255, nullable=true)
-     */
-    private $userResetSecret;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="user_reset_secret_expire", type="datetime", nullable=true)
-     */
-    private $userResetSecretExpire;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="ip_address", type="string", length=20, nullable=true)
      */
     private $ipAddress;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=false)
-     */
-    private $image;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="active", type="boolean", nullable=false)
-     */
-    private $active;
 
     /**
      * Get id

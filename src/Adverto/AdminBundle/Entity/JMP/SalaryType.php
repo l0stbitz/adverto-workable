@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_job_salary_type")
  * @ORM\Entity
  */
-class SalaryType
-{
-    
+class SalaryType {
+
     /**
      * @var integer
      *
@@ -25,165 +24,159 @@ class SalaryType
     /**
      * @var string
      *
-     * @ORM\Column(name="job_salary_type_name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $jobSalaryTypeName;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_salary_type_user_modified", type="bigint", nullable=true)
+     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
      */
-    private $jobSalaryTypeUserModified;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="job_salary_type_date_modified", type="datetime", nullable=true)
-     */
-    private $jobSalaryTypeDateModified = 'CURRENT_TIMESTAMP';
+    private $userModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_salary_type_position", type="bigint", nullable=true)
+     * @ORM\Column(name="date_modified", type="integer", nullable=true)
      */
-    private $jobSalaryTypePosition;
+    private $dateModified = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="bigint", nullable=true)
+     */
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="job_salary_type_active", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
-    private $jobSalaryTypeActive = '1';
-
-    /**
-     * Set jobSalaryTypeName
-     *
-     * @param string $jobSalaryTypeName
-     *
-     * @return SalaryType
-     */
-    public function setSalaryTypeName($jobSalaryTypeName)
-    {
-        $this->jobSalaryTypeName = $jobSalaryTypeName;
-
-        return $this;
-    }
-
-    /**
-     * Get jobSalaryTypeName
-     *
-     * @return string
-     */
-    public function getSalaryTypeName()
-    {
-        return $this->jobSalaryTypeName;
-    }
-
-    /**
-     * Set jobSalaryTypeUserModified
-     *
-     * @param integer $jobSalaryTypeUserModified
-     *
-     * @return SalaryType
-     */
-    public function setSalaryTypeUserModified($jobSalaryTypeUserModified)
-    {
-        $this->jobSalaryTypeUserModified = $jobSalaryTypeUserModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobSalaryTypeUserModified
-     *
-     * @return integer
-     */
-    public function getSalaryTypeUserModified()
-    {
-        return $this->jobSalaryTypeUserModified;
-    }
-
-    /**
-     * Set jobSalaryTypeDateModified
-     *
-     * @param \DateTime $jobSalaryTypeDateModified
-     *
-     * @return SalaryType
-     */
-    public function setSalaryTypeDateModified($jobSalaryTypeDateModified)
-    {
-        $this->jobSalaryTypeDateModified = $jobSalaryTypeDateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobSalaryTypeDateModified
-     *
-     * @return \DateTime
-     */
-    public function getSalaryTypeDateModified()
-    {
-        return $this->jobSalaryTypeDateModified;
-    }
-
-    /**
-     * Set jobSalaryTypePosition
-     *
-     * @param integer $jobSalaryTypePosition
-     *
-     * @return SalaryType
-     */
-    public function setSalaryTypePosition($jobSalaryTypePosition)
-    {
-        $this->jobSalaryTypePosition = $jobSalaryTypePosition;
-
-        return $this;
-    }
-
-    /**
-     * Get jobSalaryTypePosition
-     *
-     * @return integer
-     */
-    public function getSalaryTypePosition()
-    {
-        return $this->jobSalaryTypePosition;
-    }
-
-    /**
-     * Set jobSalaryTypeActive
-     *
-     * @param boolean $jobSalaryTypeActive
-     *
-     * @return SalaryType
-     */
-    public function setSalaryTypeActive($jobSalaryTypeActive)
-    {
-        $this->jobSalaryTypeActive = $jobSalaryTypeActive;
-
-        return $this;
-    }
-
-    /**
-     * Get jobSalaryTypeActive
-     *
-     * @return boolean
-     */
-    public function getSalaryTypeActive()
-    {
-        return $this->jobSalaryTypeActive;
-    }
+    private $active = 1;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getSalaryTypeId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return SalaryType
+     */
+    public function setName($name) {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set userModified
+     *
+     * @param integer $userModified
+     *
+     * @return SalaryType
+     */
+    public function setUserModified($userModified) {
+        $this->userModified = $userModified;
+
+        return $this;
+    }
+
+    /**
+     * Get userModified
+     *
+     * @return integer
+     */
+    public function getUserModified() {
+        return $this->userModified;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param integer $dateModified
+     *
+     * @return SalaryType
+     */
+    public function setDateModified($dateModified) {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return integer
+     */
+    public function getDateModified() {
+        return $this->dateModified;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return SalaryType
+     */
+    public function setPosition($position) {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return SalaryType
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
 }

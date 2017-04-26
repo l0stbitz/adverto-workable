@@ -1,0 +1,134 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}Job Show{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <h1>Job</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ job.id }}</td>
+            </tr>
+            <tr>
+                <th>Businessunitid</th>
+                <td>{{ job.businessUnitId }}</td>
+            </tr>
+            <tr>
+                <th>Userid</th>
+                <td>{{ job.userId }}</td>
+            </tr>
+            <tr>
+                <th>Reqid</th>
+                <td>{{ job.reqId }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ job.title }}</td>
+            </tr>
+            <tr>
+                <th>Titleseo</th>
+                <td>{{ job.titleSeo }}</td>
+            </tr>
+            <tr>
+                <th>Locationid</th>
+                <td>{{ job.locationId }}</td>
+            </tr>
+            <tr>
+                <th>Categoryid</th>
+                <td>{{ job.categoryId }}</td>
+            </tr>
+            <tr>
+                <th>Jobtypeid</th>
+                <td>{{ job.jobTypeId }}</td>
+            </tr>
+            <tr>
+                <th>Jobstatusid</th>
+                <td>{{ job.jobStatusId }}</td>
+            </tr>
+            <tr>
+                <th>Yearsofexperienceid</th>
+                <td>{{ job.yearsOfExperienceId }}</td>
+            </tr>
+            <tr>
+                <th>Careerlevelid</th>
+                <td>{{ job.careerLevelId }}</td>
+            </tr>
+            <tr>
+                <th>Educationlevelid</th>
+                <td>{{ job.educationLevelId }}</td>
+            </tr>
+            <tr>
+                <th>Salaryfrom</th>
+                <td>{{ job.salaryFrom }}</td>
+            </tr>
+            <tr>
+                <th>Salaryto</th>
+                <td>{{ job.salaryTo }}</td>
+            </tr>
+            <tr>
+                <th>Salarytypeid</th>
+                <td>{{ job.salaryTypeId }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ job.description }}</td>
+            </tr>
+            <tr>
+                <th>Applyemails</th>
+                <td>{{ job.applyEmails }}</td>
+            </tr>
+            <tr>
+                <th>Applystart</th>
+                <td>{{ job.applyStart }}</td>
+            </tr>
+            <tr>
+                <th>Applyfinish</th>
+                <td>{{ job.applyFinish }}</td>
+            </tr>
+            <tr>
+                <th>Views</th>
+                <td>{{ job.views }}</td>
+            </tr>
+            <tr>
+                <th>Dateposted</th>
+                <td>{{ job.datePosted }}</td>
+            </tr>
+            <tr>
+                <th>Startdate</th>
+                <td>{{ job.startDate }}</td>
+            </tr>
+            <tr>
+                <th>Enddate</th>
+                <td>{{ job.endDate }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if job.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ipaddress</th>
+                <td>{{ job.ipAddress }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_job_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_job_edit', { 'id': job.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_job_education_level")
  * @ORM\Entity
  */
-class EducationLevel
-{   
+class EducationLevel {
+
     /**
      * @var integer
      *
@@ -20,169 +20,163 @@ class EducationLevel
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="job_education_level_name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $jobEducationLevelName;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_education_level_user_modified", type="bigint", nullable=true)
+     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
      */
-    private $jobEducationLevelUserModified;
+    private $userModified;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="job_education_level_date_modified", type="datetime", nullable=true)
+     * @ORM\Column(name="date_modified", type="integer", nullable=true)
      */
-    private $jobEducationLevelDateModified = 'CURRENT_TIMESTAMP';
+    private $dateModified = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_education_level_position", type="bigint", nullable=true)
+     * @ORM\Column(name="position", type="bigint", nullable=true)
      */
-    private $jobEducationLevelPosition;
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="job_education_level_active", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
-    private $jobEducationLevelActive = '1';
+    private $active = 1;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     /**
-     * Set jobEducationLevelName
+     * Set name
      *
-     * @param string $jobEducationLevelName
+     * @param string $name
      *
      * @return EducationLevel
      */
-    public function setEducationLevelName($jobEducationLevelName)
-    {
-        $this->jobEducationLevelName = $jobEducationLevelName;
+    public function setName($name) {
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get jobEducationLevelName
+     * Get name
      *
      * @return string
      */
-    public function getEducationLevelName()
-    {
-        return $this->jobEducationLevelName;
+    public function getName() {
+        return $this->name;
     }
 
     /**
-     * Set jobEducationLevelUserModified
+     * Set userModified
      *
-     * @param integer $jobEducationLevelUserModified
+     * @param integer $userModified
      *
      * @return EducationLevel
      */
-    public function setEducationLevelUserModified($jobEducationLevelUserModified)
-    {
-        $this->jobEducationLevelUserModified = $jobEducationLevelUserModified;
+    public function setUserModified($userModified) {
+        $this->userModified = $userModified;
 
         return $this;
     }
 
     /**
-     * Get jobEducationLevelUserModified
+     * Get userModified
      *
      * @return integer
      */
-    public function getEducationLevelUserModified()
-    {
-        return $this->jobEducationLevelUserModified;
+    public function getUserModified() {
+        return $this->userModified;
     }
 
     /**
-     * Set jobEducationLevelDateModified
+     * Set dateModified
      *
-     * @param \DateTime $jobEducationLevelDateModified
+     * @param \DateTime $dateModified
      *
      * @return EducationLevel
      */
-    public function setEducationLevelDateModified($jobEducationLevelDateModified)
-    {
-        $this->jobEducationLevelDateModified = $jobEducationLevelDateModified;
+    public function setDateModified($dateModified) {
+        $this->dateModified = $dateModified;
 
         return $this;
     }
 
     /**
-     * Get jobEducationLevelDateModified
-     *
-     * @return \DateTime
-     */
-    public function getEducationLevelDateModified()
-    {
-        return $this->jobEducationLevelDateModified;
-    }
-
-    /**
-     * Set jobEducationLevelPosition
-     *
-     * @param integer $jobEducationLevelPosition
-     *
-     * @return EducationLevel
-     */
-    public function setEducationLevelPosition($jobEducationLevelPosition)
-    {
-        $this->jobEducationLevelPosition = $jobEducationLevelPosition;
-
-        return $this;
-    }
-
-    /**
-     * Get jobEducationLevelPosition
+     * Get dateModified
      *
      * @return integer
      */
-    public function getEducationLevelPosition()
-    {
-        return $this->jobEducationLevelPosition;
+    public function getDateModified() {
+        return $this->dateModified;
     }
 
     /**
-     * Set jobEducationLevelActive
+     * Set position
      *
-     * @param boolean $jobEducationLevelActive
+     * @param integer $position
      *
      * @return EducationLevel
      */
-    public function setEducationLevelActive($jobEducationLevelActive)
-    {
-        $this->jobEducationLevelActive = $jobEducationLevelActive;
+    public function setPosition($position) {
+        $this->position = $position;
 
         return $this;
     }
 
     /**
-     * Get jobEducationLevelActive
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return EducationLevel
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
      *
      * @return boolean
      */
-    public function getEducationLevelActive()
-    {
-        return $this->jobEducationLevelActive;
+    public function getActive() {
+        return $this->active;
     }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
 }

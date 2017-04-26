@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_job_status")
  * @ORM\Entity
  */
-class JobStatus
-{   
+class JobStatus {
+
     /**
      * @var integer
      *
@@ -24,165 +24,159 @@ class JobStatus
     /**
      * @var string
      *
-     * @ORM\Column(name="job_status_name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
-    private $jobStatusName;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_status_user_modified", type="bigint", nullable=true)
+     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
      */
-    private $jobStatusUserModified;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="job_status_date_modified", type="datetime", nullable=true)
-     */
-    private $jobStatusDateModified = 'CURRENT_TIMESTAMP';
+    private $userModified;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="job_status_position", type="bigint", nullable=true)
+     * @ORM\Column(name="date_modified", type="integer", nullable=true)
      */
-    private $jobStatusPosition;
+    private $dateModified = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="bigint", nullable=true)
+     */
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="job_status_active", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
-    private $jobStatusActive = '1';
-
-    /**
-     * Set jobStatusName
-     *
-     * @param string $jobStatusName
-     *
-     * @return JobStatus
-     */
-    public function setJobStatusName($jobStatusName)
-    {
-        $this->jobStatusName = $jobStatusName;
-
-        return $this;
-    }
-
-    /**
-     * Get jobStatusName
-     *
-     * @return string
-     */
-    public function getJobStatusName()
-    {
-        return $this->jobStatusName;
-    }
-
-    /**
-     * Set jobStatusUserModified
-     *
-     * @param integer $jobStatusUserModified
-     *
-     * @return JobStatus
-     */
-    public function setJobStatusUserModified($jobStatusUserModified)
-    {
-        $this->jobStatusUserModified = $jobStatusUserModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobStatusUserModified
-     *
-     * @return integer
-     */
-    public function getJobStatusUserModified()
-    {
-        return $this->jobStatusUserModified;
-    }
-
-    /**
-     * Set jobStatusDateModified
-     *
-     * @param \DateTime $jobStatusDateModified
-     *
-     * @return JobStatus
-     */
-    public function setJobStatusDateModified($jobStatusDateModified)
-    {
-        $this->jobStatusDateModified = $jobStatusDateModified;
-
-        return $this;
-    }
-
-    /**
-     * Get jobStatusDateModified
-     *
-     * @return \DateTime
-     */
-    public function getJobStatusDateModified()
-    {
-        return $this->jobStatusDateModified;
-    }
-
-    /**
-     * Set jobStatusPosition
-     *
-     * @param integer $jobStatusPosition
-     *
-     * @return JobStatus
-     */
-    public function setJobStatusPosition($jobStatusPosition)
-    {
-        $this->jobStatusPosition = $jobStatusPosition;
-
-        return $this;
-    }
-
-    /**
-     * Get jobStatusPosition
-     *
-     * @return integer
-     */
-    public function getJobStatusPosition()
-    {
-        return $this->jobStatusPosition;
-    }
-
-    /**
-     * Set jobStatusActive
-     *
-     * @param boolean $jobStatusActive
-     *
-     * @return JobStatus
-     */
-    public function setJobStatusActive($jobStatusActive)
-    {
-        $this->jobStatusActive = $jobStatusActive;
-
-        return $this;
-    }
-
-    /**
-     * Get jobStatusActive
-     *
-     * @return boolean
-     */
-    public function getJobStatusActive()
-    {
-        return $this->jobStatusActive;
-    }
+    private $active = 1;
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getJobStatusId()
-    {
+    public function getId() {
         return $this->id;
     }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return JobStatus
+     */
+    public function setName($name) {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * Set userModified
+     *
+     * @param integer $userModified
+     *
+     * @return JobStatus
+     */
+    public function setUserModified($userModified) {
+        $this->userModified = $userModified;
+
+        return $this;
+    }
+
+    /**
+     * Get userModified
+     *
+     * @return integer
+     */
+    public function getUserModified() {
+        return $this->userModified;
+    }
+
+    /**
+     * Set dateModified
+     *
+     * @param integer $dateModified
+     *
+     * @return JobStatus
+     */
+    public function setDateModified($dateModified) {
+        $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModified
+     *
+     * @return integer
+     */
+    public function getDateModified() {
+        return $this->dateModified;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return JobStatus
+     */
+    public function setPosition($position) {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return JobStatus
+     */
+    public function setActive($active) {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
 }
