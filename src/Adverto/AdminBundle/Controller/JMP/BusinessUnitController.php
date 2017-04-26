@@ -3,7 +3,7 @@
 namespace Adverto\AdminBundle\Controller\JMP;
 
 use Adverto\AdminBundle\Entity\JMP\BusinessUnit;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Adverto\AdminBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
@@ -15,14 +15,15 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
  * BusinessUnit controller.
  *
  */
-class BusinessUnitController extends Controller {
+class BusinessUnitController extends BaseController {
 
     /**
      * Lists all businessUnit entities.
      *
      */
     public function indexAction() {
-
+        $em = $this->getDoctrine()->getManager();
+        $this->view['businesses'] = $em->getRepository('AdminBundle:JMP\BusinessUnit')->findAll();
         return $this->_render('AdminBundle:JMP:BusinessUnit\index.html.twig');
     }
 

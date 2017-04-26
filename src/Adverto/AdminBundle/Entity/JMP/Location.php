@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="advj_locations")
  * @ORM\Entity
  */
-class Location
-{
-    
+class Location {
+
     /**
      * @var integer
      *
@@ -86,9 +85,9 @@ class Location
     private $lng = '';
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
+     * 
+     * @ORM\ManyToOne(targetEntity="\Adverto\AdminBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_modified", referencedColumnName="id")
      */
     private $userModified;
 
@@ -119,17 +118,16 @@ class Location
      * @ORM\Column(name="editable", type="boolean", nullable=true)
      */
     private $editable = 0;
-    
+
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     /**
      * Set name
      *
@@ -137,8 +135,7 @@ class Location
      *
      * @return Location
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -149,8 +146,7 @@ class Location
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -161,8 +157,7 @@ class Location
      *
      * @return Location
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
 
         return $this;
@@ -173,8 +168,7 @@ class Location
      *
      * @return string
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -185,8 +179,7 @@ class Location
      *
      * @return Location
      */
-    public function setStreetAddress($streetAddress)
-    {
+    public function setStreetAddress($streetAddress) {
         $this->streetAddress = $streetAddress;
 
         return $this;
@@ -197,8 +190,7 @@ class Location
      *
      * @return string
      */
-    public function getStreetAddress()
-    {
+    public function getStreetAddress() {
         return $this->streetAddress;
     }
 
@@ -209,8 +201,7 @@ class Location
      *
      * @return Location
      */
-    public function setCity($city)
-    {
+    public function setCity($city) {
         $this->city = $city;
 
         return $this;
@@ -221,8 +212,7 @@ class Location
      *
      * @return string
      */
-    public function getCity()
-    {
+    public function getCity() {
         return $this->city;
     }
 
@@ -233,8 +223,7 @@ class Location
      *
      * @return Location
      */
-    public function setState($state)
-    {
+    public function setState($state) {
         $this->state = $state;
 
         return $this;
@@ -245,8 +234,7 @@ class Location
      *
      * @return string
      */
-    public function getState()
-    {
+    public function getState() {
         return $this->state;
     }
 
@@ -257,8 +245,7 @@ class Location
      *
      * @return Location
      */
-    public function setZipCode($zipCode)
-    {
+    public function setZipCode($zipCode) {
         $this->zipCode = $zipCode;
 
         return $this;
@@ -269,8 +256,7 @@ class Location
      *
      * @return string
      */
-    public function getZipCode()
-    {
+    public function getZipCode() {
         return $this->zipCode;
     }
 
@@ -281,8 +267,7 @@ class Location
      *
      * @return Location
      */
-    public function setCountry($country)
-    {
+    public function setCountry($country) {
         $this->country = $country;
 
         return $this;
@@ -293,8 +278,7 @@ class Location
      *
      * @return string
      */
-    public function getCountry()
-    {
+    public function getCountry() {
         return $this->country;
     }
 
@@ -305,8 +289,7 @@ class Location
      *
      * @return Location
      */
-    public function setLat($lat)
-    {
+    public function setLat($lat) {
         $this->lat = $lat;
 
         return $this;
@@ -317,8 +300,7 @@ class Location
      *
      * @return string
      */
-    public function getLat()
-    {
+    public function getLat() {
         return $this->lat;
     }
 
@@ -329,8 +311,7 @@ class Location
      *
      * @return Location
      */
-    public function setLng($lng)
-    {
+    public function setLng($lng) {
         $this->lng = $lng;
 
         return $this;
@@ -341,8 +322,7 @@ class Location
      *
      * @return string
      */
-    public function getLng()
-    {
+    public function getLng() {
         return $this->lng;
     }
 
@@ -353,8 +333,7 @@ class Location
      *
      * @return Location
      */
-    public function setUserModified($userModified)
-    {
+    public function setUserModified($userModified) {
         $this->userModified = $userModified;
 
         return $this;
@@ -365,8 +344,7 @@ class Location
      *
      * @return integer
      */
-    public function getUserModified()
-    {
+    public function getUserModified() {
         return $this->userModified;
     }
 
@@ -377,8 +355,7 @@ class Location
      *
      * @return Location
      */
-    public function setDateModified($dateModified)
-    {
+    public function setDateModified($dateModified) {
         $this->dateModified = $dateModified;
 
         return $this;
@@ -389,8 +366,7 @@ class Location
      *
      * @return integer
      */
-    public function getDateModified()
-    {
+    public function getDateModified() {
         return $this->dateModified;
     }
 
@@ -401,8 +377,7 @@ class Location
      *
      * @return Location
      */
-    public function setPosition($position)
-    {
+    public function setPosition($position) {
         $this->position = $position;
 
         return $this;
@@ -413,8 +388,7 @@ class Location
      *
      * @return integer
      */
-    public function getPosition()
-    {
+    public function getPosition() {
         return $this->position;
     }
 
@@ -425,8 +399,7 @@ class Location
      *
      * @return Location
      */
-    public function setActive($active)
-    {
+    public function setActive($active) {
         $this->active = $active;
 
         return $this;
@@ -437,8 +410,7 @@ class Location
      *
      * @return boolean
      */
-    public function getActive()
-    {
+    public function getActive() {
         return $this->active;
     }
 
@@ -449,8 +421,7 @@ class Location
      *
      * @return Location
      */
-    public function setEditable($editable)
-    {
+    public function setEditable($editable) {
         $this->editable = $editable;
 
         return $this;
@@ -461,12 +432,12 @@ class Location
      *
      * @return boolean
      */
-    public function getEditable()
-    {
+    public function getEditable() {
         return $this->editable;
     }
-    
+
     public function __toString() {
         return $this->getName();
-    }    
+    }
+
 }

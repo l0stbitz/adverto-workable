@@ -1,0 +1,19 @@
+admin_jmp_years_of_experience_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\YearsOfExperience:index" }
+    methods:  GET
+
+admin_jmp_years_of_experience_edit:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\YearsOfExperience:edit" }
+    methods:  GET
+
+admin_jmp_years_of_experience_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\YearsOfExperience:new" }
+    methods:  [GET, POST]
+
+admin_jmp_years_of_experience_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\YearsOfExperience:delete" }
+    methods:  DELETE

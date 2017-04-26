@@ -1,0 +1,54 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+
+{% block title %}Admin - Salary Types{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <!-- Content Section Start -->
+    <div class="content-section">
+        <div class="container-liquid">
+            {% include 'AdminBundle:JMP:Base/sidebar.html.twig' %}   
+            <div class="float-row-smaller listingPages">
+                <div class="col-xs-12">
+                    <div class="col-xs-8"><h1>Admin - Salary Types</h1></div>
+                    <div class="col-xs-4">
+                        <a href="{{ path('admin_jmp_salary_type_new') }}" class="addPageBtn pull-right">CREATE A SALARY TYPE</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 headPages">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-5">Salary Type Name</div>
+                    <div class="col-xs-6">LAST LOG</div>
+                </div>
+                <div id="pages_sortable_list" class="ui-sortable">
+                    <div id="infoSorting"></div>
+                    {% for salarytype in salarytypes %}
+                    <div class="col-xs-12 listing" id="item_{{ salarytype.position }}">
+                        <div class="col-xs-1">&nbsp;</div>
+                        <div class="col-xs-5">{{ salarytype.name }}</div>
+                        <div class="col-xs-2">{{ salarytype.userModified }}</div>
+                        <div class="col-xs-2">{{ salarytype.dateModified|date("m/d/Y") }}</div>
+                        <div class="col-xs-2">
+                            <a href="#" class="actionBtn drag ui-sortable-handle" rel="">Drag</a>
+                            <a href="{{ path('admin_jmp_salary_type_edit', {id:salarytype.id}) }}" class="actionBtn edit">Edit</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-xs-12 pagesTip">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-7"><span>Tip.</span> Do you need to add another salary type?</div>
+                    <div class="col-xs-4"><a href="{{ path('admin_jmp_salary_type_new') }}" class="addPageBtn pull-right">CREATE A SALARY TYPE</a></div>
+                </div>
+            </div>
+            <!-- Row End -->
+        </div>
+    </div>
+    <script type="text/javascript">
+        var relatedPage = 'jmp/salarytype-units';
+    </script>            <!-- Content Section End -->
+{% endblock %}

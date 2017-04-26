@@ -1,0 +1,19 @@
+admin_jmp_career_level_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\CareerLevel:index" }
+    methods:  GET
+
+admin_jmp_career_level_edit:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\CareerLevel:edit" }
+    methods:  GET
+
+admin_jmp_career_level_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\CareerLevel:new" }
+    methods:  [GET, POST]
+
+admin_jmp_career_level_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\CareerLevel:delete" }
+    methods:  DELETE

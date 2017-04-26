@@ -1,0 +1,19 @@
+admin_jmp_category_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\Category:index" }
+    methods:  GET
+
+admin_jmp_category_edit:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\Category:edit" }
+    methods:  GET
+
+admin_jmp_category_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\Category:new" }
+    methods:  [GET, POST]
+
+admin_jmp_category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\Category:delete" }
+    methods:  DELETE

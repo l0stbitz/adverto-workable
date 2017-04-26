@@ -1,0 +1,19 @@
+admin_jmp_job_type_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\JobType:index" }
+    methods:  GET
+
+admin_jmp_job_type_edit:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\JobType:edit" }
+    methods:  GET
+
+admin_jmp_job_type_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\JobType:new" }
+    methods:  [GET, POST]
+
+admin_jmp_job_type_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\JobType:delete" }
+    methods:  DELETE

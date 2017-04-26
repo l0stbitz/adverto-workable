@@ -1,0 +1,19 @@
+admin_jmp_salary_type_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\SalaryType:index" }
+    methods:  GET
+
+admin_jmp_salary_type_edit:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\SalaryType:edit" }
+    methods:  GET
+
+admin_jmp_salary_type_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\SalaryType:new" }
+    methods:  [GET, POST]
+
+admin_jmp_salary_type_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\SalaryType:delete" }
+    methods:  DELETE

@@ -1,0 +1,546 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+
+{% block title %}New Job{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <!-- Content Section Start -->
+    <div class="content-section jmp">
+        <div class="container-liquid">
+            {% include 'AdminBundle:JMP:Base/sidebar.html.twig' %}       
+            <div class="float-row-smaller" id="addEditSpace">
+                <form id="postJobForm" class="form-horizontal bv-form" role="form" action="{{ path('admin_jmp_job_new') }}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+                    <h1 class="special-h1">Post a Job</h1>
+                    <div id="jobInfo" class="tab-pane fade in active">
+                        <h2 class="inSectionNoBorder">Job Information</h2>
+                        <div class="col-xs-12 form-group-container">
+                            <!-- column1 -->
+                            <div class="col-sm-6">
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobBusinessUnit" id="inputJobBusinessUnit" data-bv-field="inputJobBusinessUnit">
+                                            <option selected="selected" value="">Select a business unit</option>
+                                            {% for key,val in form.businessUnit.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.businessUnit.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.businessUnit.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobBusinessUnit" class="control-label special-form-label">Business Unit:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobBusinessUnit" data-bv-result="NOT_VALIDATED" style="display: none;">Business Unit is required and cannot be empty</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" name="inputJobTitle" class="special-form-control form-control" id="inputJobTitle" placeholder="Enter a job title" data-bv-field="inputJobTitle">
+                                        <label for="inputJobTitle" class="control-label special-form-label">Job Title:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobTitle" data-bv-result="NOT_VALIDATED" style="display: none;">Job Title is required and cannot be empty</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="inputJobTitle" data-bv-result="NOT_VALIDATED" style="display: none;">Job Title must be more than 4 and less than 100 characters long</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobType" id="inputJobType" data-bv-field="inputJobType">
+                                            <option selected="selected" value="">Select a job type</option>
+                                            {% for key,val in form.jobType.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.jobType.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.jobType.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobType" class="control-label special-form-label">Job Type:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobType" data-bv-result="NOT_VALIDATED" style="display: none;">Job Type is required and cannot be empty</small></div>
+                                </div>
+                            </div>
+
+                            <!-- column2 -->
+                            <div class="col-sm-6">
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobStatus" id="inputJobStatus" data-bv-field="inputJobStatus">
+                                            <option selected="selected" value="">Select a job status</option>
+                                            {% for key,val in form.jobStatus.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.jobStatus.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.jobStatus.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobStatus" class="control-label special-form-label">Job Status:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobStatus" data-bv-result="NOT_VALIDATED" style="display: none;">Job Status is required and cannot be empty</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobCategory" id="inputJobCategory" data-bv-field="inputJobCategory">
+                                            <option selected="selected" value="">Select a job category</option>
+                                            {% for key,val in form.category.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.category.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.category.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobCategory" class="control-label special-form-label">Job Category:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobCategory" data-bv-result="NOT_VALIDATED" style="display: none;">Job Category is required and cannot be empty</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="inSectionNoBorder">Job Location</h2>
+
+                        <div class="col-xs-12 form-group-container">
+                            <!-- column1 -->
+                            <div class="col-sm-5">
+
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <p class="no-margin-bottom">Select a pre-defined location</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="job_location_id" id="job_location_id">
+                                            <option value="">Select a location</option>
+                                            {% for key,val in form.location.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.location.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.location.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="job_location_id" class="control-label special-form-label">Location:</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <em id="location_text">
+                                        </em>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- column2 -->
+                            <div class="col-sm-1">
+                                <p id="or" class="no-margin-bottom text-center">OR</p>
+                            </div>
+
+
+                            <!-- column3 -->
+                            <div class="col-sm-6">
+
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <p class="no-margin-bottom">Enter a custom location</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobCountry" id="inputJobCountry" data-bv-field="inputJobCountry">
+                                            <option selected="selected" value="">Select a country</option>
+                                            {% for country in countries %}
+                                                <option value="{{ country.abv }}">{{ country.countryName | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobCountry" class="control-label special-form-label">Country:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobCountry" data-bv-result="NOT_VALIDATED" style="display: none;">Country is required and cannot be empty</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobState" id="inputJobState" data-bv-field="inputJobState">
+                                            <option selected="selected" value="">Select a state</option>
+                                            <option value="AL">
+                                                Alabama											    </option>
+                                            <option value="AK">
+                                                Alaska											    </option>
+                                            <option value="AZ">
+                                                Arizona											    </option>
+                                            <option value="AR">
+                                                Arkansas											    </option>
+                                            <option value="CA">
+                                                California											    </option>
+                                            <option value="CO">
+                                                Colorado											    </option>
+                                            <option value="CT">
+                                                Connecticut											    </option>
+                                            <option value="DE">
+                                                Delaware											    </option>
+                                            <option value="DC">
+                                                District of Columbia											    </option>
+                                            <option value="FL">
+                                                Florida											    </option>
+                                            <option value="GA">
+                                                Georgia											    </option>
+                                            <option value="HI">
+                                                Hawaii											    </option>
+                                            <option value="ID">
+                                                Idaho											    </option>
+                                            <option value="IL">
+                                                Illinois											    </option>
+                                            <option value="IN">
+                                                Indiana											    </option>
+                                            <option value="IA">
+                                                Iowa											    </option>
+                                            <option value="KS">
+                                                Kansas											    </option>
+                                            <option value="KY">
+                                                Kentucky											    </option>
+                                            <option value="LA">
+                                                Louisiana											    </option>
+                                            <option value="ME">
+                                                Maine											    </option>
+                                            <option value="MD">
+                                                Maryland											    </option>
+                                            <option value="MA">
+                                                Massachusetts											    </option>
+                                            <option value="MI">
+                                                Michigan											    </option>
+                                            <option value="MN">
+                                                Minnesota											    </option>
+                                            <option value="MS">
+                                                Mississippi											    </option>
+                                            <option value="MO">
+                                                Missouri											    </option>
+                                            <option value="MT">
+                                                Montana											    </option>
+                                            <option value="NE">
+                                                Nebraska											    </option>
+                                            <option value="NV">
+                                                Nevada											    </option>
+                                            <option value="NH">
+                                                New Hampshire											    </option>
+                                            <option value="NJ">
+                                                New Jersey											    </option>
+                                            <option value="NM">
+                                                New Mexico											    </option>
+                                            <option value="NY">
+                                                New York											    </option>
+                                            <option value="NC">
+                                                North Carolina											    </option>
+                                            <option value="ND">
+                                                North Dakota											    </option>
+                                            <option value="OH">
+                                                Ohio											    </option>
+                                            <option value="OK">
+                                                Oklahoma											    </option>
+                                            <option value="OR">
+                                                Oregon											    </option>
+                                            <option value="PA">
+                                                Pennsylvania											    </option>
+                                            <option value="RI">
+                                                Rhode Island											    </option>
+                                            <option value="SC">
+                                                South Carolina											    </option>
+                                            <option value="SD">
+                                                South Dakota											    </option>
+                                            <option value="TN">
+                                                Tennessee											    </option>
+                                            <option value="TX">
+                                                Texas											    </option>
+                                            <option value="UT">
+                                                Utah											    </option>
+                                            <option value="VT">
+                                                Vermont											    </option>
+                                            <option value="VA">
+                                                Virginia											    </option>
+                                            <option value="WA">
+                                                Washington											    </option>
+                                            <option value="WV">
+                                                West Virginia											    </option>
+                                            <option value="WI">
+                                                Wisconsin											    </option>
+                                            <option value="WY">
+                                                Wyoming											    </option>
+                                            <option value="PR">
+                                                Puerto Rico											    </option>
+                                        </select>
+                                        <label for="inputJobState" class="control-label special-form-label">State:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobState" data-bv-result="NOT_VALIDATED" style="display: none;">State/Province is required and cannot be empty</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" name="inputJobZipCode" class="special-form-control form-control" id="inputJobZipCode" placeholder="Enter a zip code" data-bv-field="inputJobZipCode">
+                                        <label for="inputJobZipCode" class="control-label special-form-label">Zip code: (optional)</label>
+                                        <small class="help-block" data-bv-validator="stringLength" data-bv-for="inputJobZipCode" data-bv-result="NOT_VALIDATED" style="display: none;">Zip Code must be more than 2 and less than 20 characters long</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" name="inputJobCity" class="special-form-control form-control" id="inputJobCity" placeholder="Enter a city" data-bv-field="inputJobCity">
+                                        <label for="inputJobCity" class="control-label special-form-label">City:</label>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobCity" data-bv-result="NOT_VALIDATED" style="display: none;">City is required and cannot be empty</small><small class="help-block" data-bv-validator="stringLength" data-bv-for="inputJobCity" data-bv-result="NOT_VALIDATED" style="display: none;">City must be more than 2 and less than 50 characters long</small></div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" name="inputJobStreet" class="special-form-control form-control" id="inputJobStreet" placeholder="Enter a street address">
+                                        <label for="inputJobCity" class="control-label special-form-label">Street Address: (optional)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <h2 class="inSectionNoBorder">Additional Information (Optional)</h2>
+
+                        <div class="col-xs-12 form-group-container">
+                            <!-- column1 -->
+                            <div class="col-sm-6">
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group special-multiselect">
+                                        <span class="hide-native-select">
+                                            <select class="special-form-control special-form-select form-control multiselect" name="inputJobCareerArea[]" id="inputJobCareerArea" multiple="multiple">
+                                                {% for key,val in form.careerAreas.vars.choices %}
+                                                    <option value="{{ val.value }}" {{  form.careerAreas.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.careerAreas.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                                {% endfor %} 
+                                            </select>
+                                            <div class="btn-group" style="width: 100%;"><button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected" style="width: 100%; overflow: hidden; text-overflow: ellipsis;"><span class="multiselect-selected-text">Select a career area</span> <b class="caret"></b></button>
+                                                <ul class="multiselect-container dropdown-menu">
+                                                    <li class="multiselect-item multiselect-filter" value="0">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                <i class="glyphicon glyphicon-search"></i>
+                                                            </span>
+                                                            <input class="form-control multiselect-search" type="text" placeholder="Search">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-default multiselect-clear-filter" type="button">
+                                                                    <i class="glyphicon glyphicon-remove-circle"></i>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox"><input type="checkbox" value="multiselect-all">  Select all</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="7"> Administrative</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="9"> Clinical</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="10"> Engineering</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="11"> IT</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="12"> IT Support</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="13"> Professional</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="14"> Scientific</label></a></li></ul></div></span>
+                                        <label for="inputJobCareerArea" class="control-label special-form-label">Career Area:</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" name="inputJobReqId" class="form-control special-form-control" id="inputJobReqId" placeholder="Enter a req id">
+                                        <label for="inputJobReqId" class="control-label special-form-label">Req Id:</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobYearsOfExperience" id="inputJobYearsOfExperience">
+                                            <option selected="selected" value="">Select years of experience</option>
+                                            {% for key,val in form.yearsOfExperience.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.yearsOfExperience.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.yearsOfExperience.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobYearsOfExprience" class="control-label special-form-label">Years of Experience:</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobLevel" id="inputJobLevel">
+                                            <option selected="selected" value="">Select a career level</option>
+                                            {% for key,val in form.careerLevel.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.careerLevel.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.careerLevel.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobLevel" class="control-label special-form-label">Career Level:</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- column2 -->
+                            <div class="col-sm-6">
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobEducationLevel" id="inputJobEducationLevel">
+                                            <option selected="selected" value="">Select an education level</option>
+                                            {% for key,val in form.educationLevel.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.educationLevel.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.educationLevel.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobEducationLevel" class="control-label special-form-label">Education Level:</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" class="form-control special-form-control" placeholder="Enter a salary from" id="inputJobSalaryFrom" name="inputJobSalaryFrom">
+                                        <label for="inputJobSalaryFrom" class="control-label special-form-label">Salary From:</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <input type="text" value="" class="form-control special-form-control" placeholder="Enter a salary to" id="inputJobSalaryTo" name="inputJobSalaryTo">
+                                        <label for="inputJobSalaryTo" class="control-label special-form-label">Salary To:</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group special-form-group">
+                                        <select class="form-control special-form-control special-form-select" name="inputJobSalaryType" id="inputJobSalaryType">
+                                            <option selected="selected" value="">Select a type of salary</option>
+                                            {% for key,val in form.salaryType.vars.choices %}
+                                                <option value="{{ val.value }}" {{  form.salaryType.vars.value == '' and key == 0 ? ' selected ' :(val.value == form.salaryType.vars.value ? ' selected ' : '') }}>{{ val.label | trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="inputJobSalaryType" class="control-label special-form-label">Type Of Salary:</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <h2 class="inSectionNoBorder">Job Description</h2>
+
+                        <div class="col-xs-12 form-group-container">
+
+                            <div class="col-xs-12">
+                                <div class="form-group special-form-group">
+                                    <select class="form-control special-form-control special-form-select" id="job_template_list">
+                                        <option value="">Select a job template</option>
+                                    </select>
+                                    <label for="job_template_list" class="control-label special-form-label">Start A New Job Description or Use An Existing Job Template:</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <textarea name="inputJobDescription" id="inputJobDescription" class="job_description" style="display: none;"></textarea><div class="note-editor note-frame panel panel-default"><div class="note-dropzone">  <div class="note-dropzone-message"></div></div><div class="note-toolbar panel-heading"><div class="note-btn-group btn-group note-style"><button type="button" class="note-btn btn btn-default btn-sm note-btn-bold" title="" data-original-title="Bold (CTRL+B)"><i class="note-icon-bold"></i></button><button type="button" class="note-btn btn btn-default btn-sm note-btn-italic" title="" data-original-title="Italic (CTRL+I)"><i class="note-icon-italic"></i></button><button type="button" class="note-btn btn btn-default btn-sm note-btn-underline" title="" data-original-title="Underline (CTRL+U)"><i class="note-icon-underline"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Remove Font Style (CTRL+\)"><i class="note-icon-eraser"></i></button><div class="note-btn-group btn-group"><button type="button" class="note-btn btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Line Height"><i class="note-icon-text-height"></i> <span class="note-icon-caret"></span></button><div class="dropdown-menu note-check dropdown-line-height"><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="1.0" class=""><i class="note-icon-check"></i> 1.0</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="1.2" class=""><i class="note-icon-check"></i> 1.2</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="1.4" class=""><i class="note-icon-check"></i> 1.4</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="1.5" class=""><i class="note-icon-check"></i> 1.5</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="1.6" class=""><i class="note-icon-check"></i> 1.6</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="1.8" class=""><i class="note-icon-check"></i> 1.8</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="2.0" class=""><i class="note-icon-check"></i> 2.0</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="3.0" class=""><i class="note-icon-check"></i> 3.0</a></li></div></div></div><div class="note-btn-group btn-group note-font"><button type="button" class="note-btn btn btn-default btn-sm note-btn-strikethrough" title="" data-original-title="Strikethrough (CTRL+SHIFT+S)"><i class="note-icon-strikethrough"></i></button><button type="button" class="note-btn btn btn-default btn-sm note-btn-superscript" title="" data-original-title="Superscript"><i class="note-icon-superscript"></i></button><button type="button" class="note-btn btn btn-default btn-sm note-btn-subscript" title="" data-original-title="Subscript"><i class="note-icon-subscript"></i></button></div><div class="note-btn-group btn-group note-fontsize"><div class="note-btn-group btn-group"><button type="button" class="note-btn btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Size"><span class="note-current-fontsize">15</span><span class="note-icon-caret"></span></button><div class="dropdown-menu note-check dropdown-fontsize"><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="8" class=""><i class="note-icon-check"></i> 8</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="9" class=""><i class="note-icon-check"></i> 9</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="10" class=""><i class="note-icon-check"></i> 10</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="11" class=""><i class="note-icon-check"></i> 11</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="12" class=""><i class="note-icon-check"></i> 12</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="13" class=""><i class="note-icon-check"></i> 13</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="14" class=""><i class="note-icon-check"></i> 14</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="15" class="checked"><i class="note-icon-check"></i> 15</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="16" class=""><i class="note-icon-check"></i> 16</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="17" class=""><i class="note-icon-check"></i> 17</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="18" class=""><i class="note-icon-check"></i> 18</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="19" class=""><i class="note-icon-check"></i> 19</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="20" class=""><i class="note-icon-check"></i> 20</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="24" class=""><i class="note-icon-check"></i> 24</a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="36" class=""><i class="note-icon-check"></i> 36</a></li></div></div></div><div class="note-btn-group btn-group note-fontname"><div class="note-btn-group btn-group"><button type="button" class="note-btn btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Family"><span class="note-current-fontname">Droid Sans</span> <span class="note-icon-caret"></span></button><div class="dropdown-menu note-check dropdown-fontname"><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="Droid Sans" class="checked"><i class="note-icon-check"></i> <span style="font-family:Droid Sans">Droid Sans</span></a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="Open Sans" class=""><i class="note-icon-check"></i> <span style="font-family:Open Sans">Open Sans</span></a></li><li><a href="/admin/main.php?Todo=JMP&amp;page=AddJob#" data-value="Trebuchet MS" class=""><i class="note-icon-check"></i> <span style="font-family:Trebuchet MS">Trebuchet MS</span></a></li></div></div></div><div class="note-btn-group btn-group note-lineheight"></div><div class="note-btn-group btn-group note-color"><div class="note-btn-group btn-group note-color"><button type="button" class="note-btn btn btn-default btn-sm note-current-color-button" title="" data-original-title="Recent Color" data-backcolor="#FFFF00"><i class="note-icon-font note-recent-color" style="background-color: rgb(255, 255, 0);"></i></button><button type="button" class="note-btn btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="More Color"><span class="note-icon-caret"></span></button><div class="dropdown-menu"><li><div class="btn-group">  <div class="note-palette-title">Background Color</div>  <div>    <button type="button" class="note-color-reset btn btn-default" data-event="backColor" data-value="inherit">Transparent    </button>  </div>  <div class="note-holder" data-event="backColor"><div class="note-color-palette"><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#000000" data-event="backColor" data-value="#000000" title="" data-toggle="button" tabindex="-1" data-original-title="#000000"></button><button type="button" class="note-color-btn" style="background-color:#424242" data-event="backColor" data-value="#424242" title="" data-toggle="button" tabindex="-1" data-original-title="#424242"></button><button type="button" class="note-color-btn" style="background-color:#636363" data-event="backColor" data-value="#636363" title="" data-toggle="button" tabindex="-1" data-original-title="#636363"></button><button type="button" class="note-color-btn" style="background-color:#9C9C94" data-event="backColor" data-value="#9C9C94" title="" data-toggle="button" tabindex="-1" data-original-title="#9C9C94"></button><button type="button" class="note-color-btn" style="background-color:#CEC6CE" data-event="backColor" data-value="#CEC6CE" title="" data-toggle="button" tabindex="-1" data-original-title="#CEC6CE"></button><button type="button" class="note-color-btn" style="background-color:#EFEFEF" data-event="backColor" data-value="#EFEFEF" title="" data-toggle="button" tabindex="-1" data-original-title="#EFEFEF"></button><button type="button" class="note-color-btn" style="background-color:#F7F7F7" data-event="backColor" data-value="#F7F7F7" title="" data-toggle="button" tabindex="-1" data-original-title="#F7F7F7"></button><button type="button" class="note-color-btn" style="background-color:#FFFFFF" data-event="backColor" data-value="#FFFFFF" title="" data-toggle="button" tabindex="-1" data-original-title="#FFFFFF"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#FF0000" data-event="backColor" data-value="#FF0000" title="" data-toggle="button" tabindex="-1" data-original-title="#FF0000"></button><button type="button" class="note-color-btn" style="background-color:#FF9C00" data-event="backColor" data-value="#FF9C00" title="" data-toggle="button" tabindex="-1" data-original-title="#FF9C00"></button><button type="button" class="note-color-btn" style="background-color:#FFFF00" data-event="backColor" data-value="#FFFF00" title="" data-toggle="button" tabindex="-1" data-original-title="#FFFF00"></button><button type="button" class="note-color-btn" style="background-color:#00FF00" data-event="backColor" data-value="#00FF00" title="" data-toggle="button" tabindex="-1" data-original-title="#00FF00"></button><button type="button" class="note-color-btn" style="background-color:#00FFFF" data-event="backColor" data-value="#00FFFF" title="" data-toggle="button" tabindex="-1" data-original-title="#00FFFF"></button><button type="button" class="note-color-btn" style="background-color:#0000FF" data-event="backColor" data-value="#0000FF" title="" data-toggle="button" tabindex="-1" data-original-title="#0000FF"></button><button type="button" class="note-color-btn" style="background-color:#9C00FF" data-event="backColor" data-value="#9C00FF" title="" data-toggle="button" tabindex="-1" data-original-title="#9C00FF"></button><button type="button" class="note-color-btn" style="background-color:#FF00FF" data-event="backColor" data-value="#FF00FF" title="" data-toggle="button" tabindex="-1" data-original-title="#FF00FF"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#F7C6CE" data-event="backColor" data-value="#F7C6CE" title="" data-toggle="button" tabindex="-1" data-original-title="#F7C6CE"></button><button type="button" class="note-color-btn" style="background-color:#FFE7CE" data-event="backColor" data-value="#FFE7CE" title="" data-toggle="button" tabindex="-1" data-original-title="#FFE7CE"></button><button type="button" class="note-color-btn" style="background-color:#FFEFC6" data-event="backColor" data-value="#FFEFC6" title="" data-toggle="button" tabindex="-1" data-original-title="#FFEFC6"></button><button type="button" class="note-color-btn" style="background-color:#D6EFD6" data-event="backColor" data-value="#D6EFD6" title="" data-toggle="button" tabindex="-1" data-original-title="#D6EFD6"></button><button type="button" class="note-color-btn" style="background-color:#CEDEE7" data-event="backColor" data-value="#CEDEE7" title="" data-toggle="button" tabindex="-1" data-original-title="#CEDEE7"></button><button type="button" class="note-color-btn" style="background-color:#CEE7F7" data-event="backColor" data-value="#CEE7F7" title="" data-toggle="button" tabindex="-1" data-original-title="#CEE7F7"></button><button type="button" class="note-color-btn" style="background-color:#D6D6E7" data-event="backColor" data-value="#D6D6E7" title="" data-toggle="button" tabindex="-1" data-original-title="#D6D6E7"></button><button type="button" class="note-color-btn" style="background-color:#E7D6DE" data-event="backColor" data-value="#E7D6DE" title="" data-toggle="button" tabindex="-1" data-original-title="#E7D6DE"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#E79C9C" data-event="backColor" data-value="#E79C9C" title="" data-toggle="button" tabindex="-1" data-original-title="#E79C9C"></button><button type="button" class="note-color-btn" style="background-color:#FFC69C" data-event="backColor" data-value="#FFC69C" title="" data-toggle="button" tabindex="-1" data-original-title="#FFC69C"></button><button type="button" class="note-color-btn" style="background-color:#FFE79C" data-event="backColor" data-value="#FFE79C" title="" data-toggle="button" tabindex="-1" data-original-title="#FFE79C"></button><button type="button" class="note-color-btn" style="background-color:#B5D6A5" data-event="backColor" data-value="#B5D6A5" title="" data-toggle="button" tabindex="-1" data-original-title="#B5D6A5"></button><button type="button" class="note-color-btn" style="background-color:#A5C6CE" data-event="backColor" data-value="#A5C6CE" title="" data-toggle="button" tabindex="-1" data-original-title="#A5C6CE"></button><button type="button" class="note-color-btn" style="background-color:#9CC6EF" data-event="backColor" data-value="#9CC6EF" title="" data-toggle="button" tabindex="-1" data-original-title="#9CC6EF"></button><button type="button" class="note-color-btn" style="background-color:#B5A5D6" data-event="backColor" data-value="#B5A5D6" title="" data-toggle="button" tabindex="-1" data-original-title="#B5A5D6"></button><button type="button" class="note-color-btn" style="background-color:#D6A5BD" data-event="backColor" data-value="#D6A5BD" title="" data-toggle="button" tabindex="-1" data-original-title="#D6A5BD"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#E76363" data-event="backColor" data-value="#E76363" title="" data-toggle="button" tabindex="-1" data-original-title="#E76363"></button><button type="button" class="note-color-btn" style="background-color:#F7AD6B" data-event="backColor" data-value="#F7AD6B" title="" data-toggle="button" tabindex="-1" data-original-title="#F7AD6B"></button><button type="button" class="note-color-btn" style="background-color:#FFD663" data-event="backColor" data-value="#FFD663" title="" data-toggle="button" tabindex="-1" data-original-title="#FFD663"></button><button type="button" class="note-color-btn" style="background-color:#94BD7B" data-event="backColor" data-value="#94BD7B" title="" data-toggle="button" tabindex="-1" data-original-title="#94BD7B"></button><button type="button" class="note-color-btn" style="background-color:#73A5AD" data-event="backColor" data-value="#73A5AD" title="" data-toggle="button" tabindex="-1" data-original-title="#73A5AD"></button><button type="button" class="note-color-btn" style="background-color:#6BADDE" data-event="backColor" data-value="#6BADDE" title="" data-toggle="button" tabindex="-1" data-original-title="#6BADDE"></button><button type="button" class="note-color-btn" style="background-color:#8C7BC6" data-event="backColor" data-value="#8C7BC6" title="" data-toggle="button" tabindex="-1" data-original-title="#8C7BC6"></button><button type="button" class="note-color-btn" style="background-color:#C67BA5" data-event="backColor" data-value="#C67BA5" title="" data-toggle="button" tabindex="-1" data-original-title="#C67BA5"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#CE0000" data-event="backColor" data-value="#CE0000" title="" data-toggle="button" tabindex="-1" data-original-title="#CE0000"></button><button type="button" class="note-color-btn" style="background-color:#E79439" data-event="backColor" data-value="#E79439" title="" data-toggle="button" tabindex="-1" data-original-title="#E79439"></button><button type="button" class="note-color-btn" style="background-color:#EFC631" data-event="backColor" data-value="#EFC631" title="" data-toggle="button" tabindex="-1" data-original-title="#EFC631"></button><button type="button" class="note-color-btn" style="background-color:#6BA54A" data-event="backColor" data-value="#6BA54A" title="" data-toggle="button" tabindex="-1" data-original-title="#6BA54A"></button><button type="button" class="note-color-btn" style="background-color:#4A7B8C" data-event="backColor" data-value="#4A7B8C" title="" data-toggle="button" tabindex="-1" data-original-title="#4A7B8C"></button><button type="button" class="note-color-btn" style="background-color:#3984C6" data-event="backColor" data-value="#3984C6" title="" data-toggle="button" tabindex="-1" data-original-title="#3984C6"></button><button type="button" class="note-color-btn" style="background-color:#634AA5" data-event="backColor" data-value="#634AA5" title="" data-toggle="button" tabindex="-1" data-original-title="#634AA5"></button><button type="button" class="note-color-btn" style="background-color:#A54A7B" data-event="backColor" data-value="#A54A7B" title="" data-toggle="button" tabindex="-1" data-original-title="#A54A7B"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#9C0000" data-event="backColor" data-value="#9C0000" title="" data-toggle="button" tabindex="-1" data-original-title="#9C0000"></button><button type="button" class="note-color-btn" style="background-color:#B56308" data-event="backColor" data-value="#B56308" title="" data-toggle="button" tabindex="-1" data-original-title="#B56308"></button><button type="button" class="note-color-btn" style="background-color:#BD9400" data-event="backColor" data-value="#BD9400" title="" data-toggle="button" tabindex="-1" data-original-title="#BD9400"></button><button type="button" class="note-color-btn" style="background-color:#397B21" data-event="backColor" data-value="#397B21" title="" data-toggle="button" tabindex="-1" data-original-title="#397B21"></button><button type="button" class="note-color-btn" style="background-color:#104A5A" data-event="backColor" data-value="#104A5A" title="" data-toggle="button" tabindex="-1" data-original-title="#104A5A"></button><button type="button" class="note-color-btn" style="background-color:#085294" data-event="backColor" data-value="#085294" title="" data-toggle="button" tabindex="-1" data-original-title="#085294"></button><button type="button" class="note-color-btn" style="background-color:#311873" data-event="backColor" data-value="#311873" title="" data-toggle="button" tabindex="-1" data-original-title="#311873"></button><button type="button" class="note-color-btn" style="background-color:#731842" data-event="backColor" data-value="#731842" title="" data-toggle="button" tabindex="-1" data-original-title="#731842"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#630000" data-event="backColor" data-value="#630000" title="" data-toggle="button" tabindex="-1" data-original-title="#630000"></button><button type="button" class="note-color-btn" style="background-color:#7B3900" data-event="backColor" data-value="#7B3900" title="" data-toggle="button" tabindex="-1" data-original-title="#7B3900"></button><button type="button" class="note-color-btn" style="background-color:#846300" data-event="backColor" data-value="#846300" title="" data-toggle="button" tabindex="-1" data-original-title="#846300"></button><button type="button" class="note-color-btn" style="background-color:#295218" data-event="backColor" data-value="#295218" title="" data-toggle="button" tabindex="-1" data-original-title="#295218"></button><button type="button" class="note-color-btn" style="background-color:#083139" data-event="backColor" data-value="#083139" title="" data-toggle="button" tabindex="-1" data-original-title="#083139"></button><button type="button" class="note-color-btn" style="background-color:#003163" data-event="backColor" data-value="#003163" title="" data-toggle="button" tabindex="-1" data-original-title="#003163"></button><button type="button" class="note-color-btn" style="background-color:#21104A" data-event="backColor" data-value="#21104A" title="" data-toggle="button" tabindex="-1" data-original-title="#21104A"></button><button type="button" class="note-color-btn" style="background-color:#4A1031" data-event="backColor" data-value="#4A1031" title="" data-toggle="button" tabindex="-1" data-original-title="#4A1031"></button></div></div></div></div><div class="btn-group">  <div class="note-palette-title">Foreground Color</div>  <div>    <button type="button" class="note-color-reset btn btn-default" data-event="removeFormat" data-value="foreColor">Reset to default    </button>  </div>  <div class="note-holder" data-event="foreColor"><div class="note-color-palette"><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#000000" data-event="foreColor" data-value="#000000" title="" data-toggle="button" tabindex="-1" data-original-title="#000000"></button><button type="button" class="note-color-btn" style="background-color:#424242" data-event="foreColor" data-value="#424242" title="" data-toggle="button" tabindex="-1" data-original-title="#424242"></button><button type="button" class="note-color-btn" style="background-color:#636363" data-event="foreColor" data-value="#636363" title="" data-toggle="button" tabindex="-1" data-original-title="#636363"></button><button type="button" class="note-color-btn" style="background-color:#9C9C94" data-event="foreColor" data-value="#9C9C94" title="" data-toggle="button" tabindex="-1" data-original-title="#9C9C94"></button><button type="button" class="note-color-btn" style="background-color:#CEC6CE" data-event="foreColor" data-value="#CEC6CE" title="" data-toggle="button" tabindex="-1" data-original-title="#CEC6CE"></button><button type="button" class="note-color-btn" style="background-color:#EFEFEF" data-event="foreColor" data-value="#EFEFEF" title="" data-toggle="button" tabindex="-1" data-original-title="#EFEFEF"></button><button type="button" class="note-color-btn" style="background-color:#F7F7F7" data-event="foreColor" data-value="#F7F7F7" title="" data-toggle="button" tabindex="-1" data-original-title="#F7F7F7"></button><button type="button" class="note-color-btn" style="background-color:#FFFFFF" data-event="foreColor" data-value="#FFFFFF" title="" data-toggle="button" tabindex="-1" data-original-title="#FFFFFF"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#FF0000" data-event="foreColor" data-value="#FF0000" title="" data-toggle="button" tabindex="-1" data-original-title="#FF0000"></button><button type="button" class="note-color-btn" style="background-color:#FF9C00" data-event="foreColor" data-value="#FF9C00" title="" data-toggle="button" tabindex="-1" data-original-title="#FF9C00"></button><button type="button" class="note-color-btn" style="background-color:#FFFF00" data-event="foreColor" data-value="#FFFF00" title="" data-toggle="button" tabindex="-1" data-original-title="#FFFF00"></button><button type="button" class="note-color-btn" style="background-color:#00FF00" data-event="foreColor" data-value="#00FF00" title="" data-toggle="button" tabindex="-1" data-original-title="#00FF00"></button><button type="button" class="note-color-btn" style="background-color:#00FFFF" data-event="foreColor" data-value="#00FFFF" title="" data-toggle="button" tabindex="-1" data-original-title="#00FFFF"></button><button type="button" class="note-color-btn" style="background-color:#0000FF" data-event="foreColor" data-value="#0000FF" title="" data-toggle="button" tabindex="-1" data-original-title="#0000FF"></button><button type="button" class="note-color-btn" style="background-color:#9C00FF" data-event="foreColor" data-value="#9C00FF" title="" data-toggle="button" tabindex="-1" data-original-title="#9C00FF"></button><button type="button" class="note-color-btn" style="background-color:#FF00FF" data-event="foreColor" data-value="#FF00FF" title="" data-toggle="button" tabindex="-1" data-original-title="#FF00FF"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#F7C6CE" data-event="foreColor" data-value="#F7C6CE" title="" data-toggle="button" tabindex="-1" data-original-title="#F7C6CE"></button><button type="button" class="note-color-btn" style="background-color:#FFE7CE" data-event="foreColor" data-value="#FFE7CE" title="" data-toggle="button" tabindex="-1" data-original-title="#FFE7CE"></button><button type="button" class="note-color-btn" style="background-color:#FFEFC6" data-event="foreColor" data-value="#FFEFC6" title="" data-toggle="button" tabindex="-1" data-original-title="#FFEFC6"></button><button type="button" class="note-color-btn" style="background-color:#D6EFD6" data-event="foreColor" data-value="#D6EFD6" title="" data-toggle="button" tabindex="-1" data-original-title="#D6EFD6"></button><button type="button" class="note-color-btn" style="background-color:#CEDEE7" data-event="foreColor" data-value="#CEDEE7" title="" data-toggle="button" tabindex="-1" data-original-title="#CEDEE7"></button><button type="button" class="note-color-btn" style="background-color:#CEE7F7" data-event="foreColor" data-value="#CEE7F7" title="" data-toggle="button" tabindex="-1" data-original-title="#CEE7F7"></button><button type="button" class="note-color-btn" style="background-color:#D6D6E7" data-event="foreColor" data-value="#D6D6E7" title="" data-toggle="button" tabindex="-1" data-original-title="#D6D6E7"></button><button type="button" class="note-color-btn" style="background-color:#E7D6DE" data-event="foreColor" data-value="#E7D6DE" title="" data-toggle="button" tabindex="-1" data-original-title="#E7D6DE"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#E79C9C" data-event="foreColor" data-value="#E79C9C" title="" data-toggle="button" tabindex="-1" data-original-title="#E79C9C"></button><button type="button" class="note-color-btn" style="background-color:#FFC69C" data-event="foreColor" data-value="#FFC69C" title="" data-toggle="button" tabindex="-1" data-original-title="#FFC69C"></button><button type="button" class="note-color-btn" style="background-color:#FFE79C" data-event="foreColor" data-value="#FFE79C" title="" data-toggle="button" tabindex="-1" data-original-title="#FFE79C"></button><button type="button" class="note-color-btn" style="background-color:#B5D6A5" data-event="foreColor" data-value="#B5D6A5" title="" data-toggle="button" tabindex="-1" data-original-title="#B5D6A5"></button><button type="button" class="note-color-btn" style="background-color:#A5C6CE" data-event="foreColor" data-value="#A5C6CE" title="" data-toggle="button" tabindex="-1" data-original-title="#A5C6CE"></button><button type="button" class="note-color-btn" style="background-color:#9CC6EF" data-event="foreColor" data-value="#9CC6EF" title="" data-toggle="button" tabindex="-1" data-original-title="#9CC6EF"></button><button type="button" class="note-color-btn" style="background-color:#B5A5D6" data-event="foreColor" data-value="#B5A5D6" title="" data-toggle="button" tabindex="-1" data-original-title="#B5A5D6"></button><button type="button" class="note-color-btn" style="background-color:#D6A5BD" data-event="foreColor" data-value="#D6A5BD" title="" data-toggle="button" tabindex="-1" data-original-title="#D6A5BD"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#E76363" data-event="foreColor" data-value="#E76363" title="" data-toggle="button" tabindex="-1" data-original-title="#E76363"></button><button type="button" class="note-color-btn" style="background-color:#F7AD6B" data-event="foreColor" data-value="#F7AD6B" title="" data-toggle="button" tabindex="-1" data-original-title="#F7AD6B"></button><button type="button" class="note-color-btn" style="background-color:#FFD663" data-event="foreColor" data-value="#FFD663" title="" data-toggle="button" tabindex="-1" data-original-title="#FFD663"></button><button type="button" class="note-color-btn" style="background-color:#94BD7B" data-event="foreColor" data-value="#94BD7B" title="" data-toggle="button" tabindex="-1" data-original-title="#94BD7B"></button><button type="button" class="note-color-btn" style="background-color:#73A5AD" data-event="foreColor" data-value="#73A5AD" title="" data-toggle="button" tabindex="-1" data-original-title="#73A5AD"></button><button type="button" class="note-color-btn" style="background-color:#6BADDE" data-event="foreColor" data-value="#6BADDE" title="" data-toggle="button" tabindex="-1" data-original-title="#6BADDE"></button><button type="button" class="note-color-btn" style="background-color:#8C7BC6" data-event="foreColor" data-value="#8C7BC6" title="" data-toggle="button" tabindex="-1" data-original-title="#8C7BC6"></button><button type="button" class="note-color-btn" style="background-color:#C67BA5" data-event="foreColor" data-value="#C67BA5" title="" data-toggle="button" tabindex="-1" data-original-title="#C67BA5"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#CE0000" data-event="foreColor" data-value="#CE0000" title="" data-toggle="button" tabindex="-1" data-original-title="#CE0000"></button><button type="button" class="note-color-btn" style="background-color:#E79439" data-event="foreColor" data-value="#E79439" title="" data-toggle="button" tabindex="-1" data-original-title="#E79439"></button><button type="button" class="note-color-btn" style="background-color:#EFC631" data-event="foreColor" data-value="#EFC631" title="" data-toggle="button" tabindex="-1" data-original-title="#EFC631"></button><button type="button" class="note-color-btn" style="background-color:#6BA54A" data-event="foreColor" data-value="#6BA54A" title="" data-toggle="button" tabindex="-1" data-original-title="#6BA54A"></button><button type="button" class="note-color-btn" style="background-color:#4A7B8C" data-event="foreColor" data-value="#4A7B8C" title="" data-toggle="button" tabindex="-1" data-original-title="#4A7B8C"></button><button type="button" class="note-color-btn" style="background-color:#3984C6" data-event="foreColor" data-value="#3984C6" title="" data-toggle="button" tabindex="-1" data-original-title="#3984C6"></button><button type="button" class="note-color-btn" style="background-color:#634AA5" data-event="foreColor" data-value="#634AA5" title="" data-toggle="button" tabindex="-1" data-original-title="#634AA5"></button><button type="button" class="note-color-btn" style="background-color:#A54A7B" data-event="foreColor" data-value="#A54A7B" title="" data-toggle="button" tabindex="-1" data-original-title="#A54A7B"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#9C0000" data-event="foreColor" data-value="#9C0000" title="" data-toggle="button" tabindex="-1" data-original-title="#9C0000"></button><button type="button" class="note-color-btn" style="background-color:#B56308" data-event="foreColor" data-value="#B56308" title="" data-toggle="button" tabindex="-1" data-original-title="#B56308"></button><button type="button" class="note-color-btn" style="background-color:#BD9400" data-event="foreColor" data-value="#BD9400" title="" data-toggle="button" tabindex="-1" data-original-title="#BD9400"></button><button type="button" class="note-color-btn" style="background-color:#397B21" data-event="foreColor" data-value="#397B21" title="" data-toggle="button" tabindex="-1" data-original-title="#397B21"></button><button type="button" class="note-color-btn" style="background-color:#104A5A" data-event="foreColor" data-value="#104A5A" title="" data-toggle="button" tabindex="-1" data-original-title="#104A5A"></button><button type="button" class="note-color-btn" style="background-color:#085294" data-event="foreColor" data-value="#085294" title="" data-toggle="button" tabindex="-1" data-original-title="#085294"></button><button type="button" class="note-color-btn" style="background-color:#311873" data-event="foreColor" data-value="#311873" title="" data-toggle="button" tabindex="-1" data-original-title="#311873"></button><button type="button" class="note-color-btn" style="background-color:#731842" data-event="foreColor" data-value="#731842" title="" data-toggle="button" tabindex="-1" data-original-title="#731842"></button></div><div class="note-color-row"><button type="button" class="note-color-btn" style="background-color:#630000" data-event="foreColor" data-value="#630000" title="" data-toggle="button" tabindex="-1" data-original-title="#630000"></button><button type="button" class="note-color-btn" style="background-color:#7B3900" data-event="foreColor" data-value="#7B3900" title="" data-toggle="button" tabindex="-1" data-original-title="#7B3900"></button><button type="button" class="note-color-btn" style="background-color:#846300" data-event="foreColor" data-value="#846300" title="" data-toggle="button" tabindex="-1" data-original-title="#846300"></button><button type="button" class="note-color-btn" style="background-color:#295218" data-event="foreColor" data-value="#295218" title="" data-toggle="button" tabindex="-1" data-original-title="#295218"></button><button type="button" class="note-color-btn" style="background-color:#083139" data-event="foreColor" data-value="#083139" title="" data-toggle="button" tabindex="-1" data-original-title="#083139"></button><button type="button" class="note-color-btn" style="background-color:#003163" data-event="foreColor" data-value="#003163" title="" data-toggle="button" tabindex="-1" data-original-title="#003163"></button><button type="button" class="note-color-btn" style="background-color:#21104A" data-event="foreColor" data-value="#21104A" title="" data-toggle="button" tabindex="-1" data-original-title="#21104A"></button><button type="button" class="note-color-btn" style="background-color:#4A1031" data-event="foreColor" data-value="#4A1031" title="" data-toggle="button" tabindex="-1" data-original-title="#4A1031"></button></div></div></div></div></li></div></div></div><div class="note-btn-group btn-group note-para"><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Unordered list (CTRL+SHIFT+NUM7)"><i class="note-icon-unorderedlist"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Ordered list (CTRL+SHIFT+NUM8)"><i class="note-icon-orderedlist"></i></button><div class="note-btn-group btn-group"><button type="button" class="note-btn btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Paragraph"><i class="note-icon-align-left"></i> <span class="note-icon-caret"></span></button><div class="dropdown-menu"><div class="note-btn-group btn-group note-align"><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Align left (CTRL+SHIFT+L)"><i class="note-icon-align-left"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Align center (CTRL+SHIFT+E)"><i class="note-icon-align-center"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Align right (CTRL+SHIFT+R)"><i class="note-icon-align-right"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Justify full (CTRL+SHIFT+J)"><i class="note-icon-align-justify"></i></button></div><div class="note-btn-group btn-group note-list"><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Outdent (CTRL+[)"><i class="note-icon-align-outdent"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Indent (CTRL+])"><i class="note-icon-align-indent"></i></button></div></div></div></div><div class="note-btn-group btn-group note-height"></div><div class="note-btn-group btn-group note-insert"><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Link"><i class="note-icon-link"></i></button><button type="button" class="note-btn btn btn-default btn-sm" title="" data-original-title="Picture"><i class="note-icon-picture"></i></button></div></div><div class="note-editing-area"><div class="note-placeholder" style="display: block;">Enter the job description</div><div class="note-handle"><div class="note-control-selection"><div class="note-control-selection-bg"></div><div class="note-control-holder note-control-nw"></div><div class="note-control-holder note-control-ne"></div><div class="note-control-holder note-control-sw"></div><div class="note-control-sizing note-control-se"></div><div class="note-control-selection-info"></div></div></div><textarea class="note-codable"></textarea><div class="note-editable panel-body" contenteditable="true" style="height: 300px;"><p></p></div></div><div class="note-statusbar">  <div class="note-resizebar">    <div class="note-icon-bar"></div>    <div class="note-icon-bar"></div>    <div class="note-icon-bar"></div>  </div></div></div>
+					            </div>
+					        </div>
+
+					    </div>
+
+					    <!--Crossposting-->
+					    <h2 class="inSectionNoBorder">Job Cross-Posting</h2>
+
+					    <div class="col-xs-12 form-group-container">
+						    <div class="col-xs-12">
+							    <div class="form-group no-margin-bottom">
+								    <label class="control-label">Post Job To:</label>
+							    </div>
+						    </div>
+						    <div class="col-xs-12">
+						        <div class="form-group no-margin-bottom">
+                                                            <div class="checkbox-inline">
+								<label>
+								<input type="checkbox" name="jobFeeds[]" autocomplete="off" value="1"> Monster								        </label>
+							    </div>
+							    <div class="checkbox-inline">
+								        <label>
+									        <input type="checkbox" name="jobFeeds[]" autocomplete="off" value="2"> ZipRecruiter								        </label>
+							        </div>
+								    							    </div>
+						    </div>
+					    </div>
+
+					    <h2 class="inSectionNoBorder">Posting Schedule</h2>
+
+					    <div class="col-xs-12 form-group-container">
+						    <!-- column1 -->
+						    <div class="col-sm-6">
+							<div class="col-xs-12">
+                                                            <div class="form-group special-form-group">
+								<input type="text" value="" name="inputJobStartDate" class="form-control special-form-control hasDatepicker" id="inputJobStartDate" placeholder="Start Date" data-bv-field="inputJobStartDate">
+								<label for="inputJobStartDate" class="control-label special-form-label">Start Date:</label>
+								<small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobStartDate" data-bv-result="NOT_VALIDATED" style="display: none;">Start Date is required and cannot be empty</small>
+                                                            </div>
+							</div>
+						    </div>
+
+						    <!-- column2 -->
+						    <div class="col-sm-6">
+							    <div class="col-xs-12">
+								    <div class="form-group special-form-group">
+									    <input type="text" value="" name="inputJobEndDate" class="form-control special-form-control hasDatepicker" id="inputJobEndDate" placeholder="End Date" data-bv-field="inputJobEndDate">
+									    <label for="inputJobEndDate" class="control-label special-form-label">End Date:</label>
+								    <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobEndDate" data-bv-result="NOT_VALIDATED" style="display: none;">End Date is required and cannot be empty</small></div>
+							    </div>
+						    </div>
+
+					    </div>
+
+					    <h2 class="inSectionNoBorder">Recipient(s) of job applications</h2>
+
+					    <div class="col-xs-12 form-group-container">
+						    <!--Recruiter Emails-->
+						    <div class="col-xs-12">
+							    <div class="form-group">
+						            <label class="control-label">Recruiter(s) who should receive the applications (optional)</label>
+						        </div>
+						    </div>
+						    <div class="col-xs-12">
+							    							    <div class="form-group">
+									<div class="col-md-10 col-sm-10 col-xs-10">
+										<!--Email Address-->
+										<div class="input-holder">
+											<input type="email" class="form-control" placeholder="Email Address" value="" name="recruiterEmails[]" data-bv-field="recruiterEmails[]">
+										</div>
+									<small class="help-block" data-bv-validator="emailAddress" data-bv-for="recruiterEmails[]" data-bv-result="NOT_VALIDATED" style="display: none;">Please enter a valid email address</small></div>
+									<div class="col-md-2 col-sm-2 col-xs-2">
+																				<button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
+																			</div>
+									<div class="clear"></div>
+							    </div>
+							    							    <!-- The option field template containing an option field and a Remove button -->
+							    <div class="form-group hide" id="recruiterEmailTemplate">
+								    <div class="col-md-10 col-sm-10 col-xs-10">
+									    <!--Email Address-->
+									    <div class="input-holder">
+										    <input type="email" class="form-control" placeholder="Email Address" name="recruiterEmails[]" disabled="" data-bv-field="recruiterEmails[]">
+									    </div>
+								    <small class="help-block" data-bv-validator="emailAddress" data-bv-for="recruiterEmails[]" data-bv-result="NOT_VALIDATED" style="display: none;">Please enter a valid email address</small></div>
+								    <div class="col-md-2 col-sm-2 col-xs-2">
+									    <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
+								    </div>
+								    <div class="clear"></div>
+							    </div>
+						    </div>
+					    </div>
+
+					    <h2 class="inSectionNoBorder">Terms &amp; Conditions</h2>
+
+					    <div class="col-xs-12 form-group-container">
+						    <!-- Terms & Conditions -->
+						    <div class="col-xs-12">
+							    <div class="form-group">
+								    <div class="checkbox">
+									    <label class="">
+										    <input type="checkbox" name="inputJobTerms" id="inputJobTerms" data-bv-field="inputJobTerms">
+										    I have read and agreed to the <a class="text-underline" data-toggle="modal" data-target=".bs-terms-modal">Terms &amp; Conditions</a>
+										    <span title="Please agree to the Terms &amp; Conditions" id="terms-checkbox"></span>
+									    </label>
+									    <label for="terms"></label>
+								    </div>
+							    <small class="help-block" data-bv-validator="notEmpty" data-bv-for="inputJobTerms" data-bv-result="NOT_VALIDATED" style="display: none;">Please agree to the Terms &amp; Conditions</small></div>
+						    </div>
+					    </div>
+
+					    <div class="clear"></div>
+				    </div>
+
+				    <div class="btnHolder">
+					    <input type="hidden" name="jobId" value="">
+				        <button type="submit" class="btnStyle2" name="save-job">Ready? Post The Job</button>
+				        <div class="clear"></div>
+				        <a href="/admin/main.php?Todo=JMP" class="cancel">cancel</a>
+				    </div>
+			</form>
+        </div>
+        <!-- Row End -->
+    </div>
+</div>
+<div class="modal fade bs-terms-modal" tabindex="-1" role="dialog" aria-labelledby="myTermsModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h3 class="modal-title" id="myModalLabel">Terms and Conditions</h3>
+			</div>
+			<div class="modal-body">
+				<p>Monster reserves the right to reject job postings that are not bona-fide recruitment ads, or for any other reason we consider not in the best interest of Monster.<br><br>
+					Please note that once you click Complete Posting, your posting is FINAL and the cost is NON-REFUNDABLE. Monster reserves the right to reject ads that are not bona-fide recruitment ads, or for any other reason we consider not in the best interest of Monster.</p>
+
+				<h4>Prohibited Job Postings</h4>
+				<p>Without limiting Monster's Terms of Agreement, Monster does not permit the posting of any of the following:any posting that does not comply with applicable local, national and international laws, including but not limited to laws relating to labor and employment, equal employment opportunity and employment eligibility requirements, data privacy, data access and use, and intellectual property;any franchise, pyramid scheme, ""club membership"", distributorship or sales representative agency arrangement; ORany other business opportunity which requires an up front or periodic payment, pays commissions only (except for postings that make clear that the available job pays commission only and clearly describes the product or service that the job seeker would be selling, in which case such postings are permissible), or requires recruitment of other members, sub-distributors or sub-agents.If you post any prohibited posting, Monster will remove such posting and no refund will be given.</p>
+			</div>
+		</div>
+	</div>
+</div>            <!-- Content Section End -->
+{% endblock %}

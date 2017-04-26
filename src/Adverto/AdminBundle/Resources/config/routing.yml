@@ -10,6 +10,42 @@ admin_jmp_business_unit:
     resource: "@AdminBundle/Resources/config/routing/JMP/businessunit.yml"
     prefix:   /jmp/businessunit    
     
+admin_jmp_location:
+    resource: "@AdminBundle/Resources/config/routing/JMP/location.yml"
+    prefix:   /jmp/location    
+    
+admin_jmp_career_area:
+    resource: "@AdminBundle/Resources/config/routing/JMP/careerarea.yml"
+    prefix:   /jmp/careerarea     
+    
+admin_jmp_category:
+    resource: "@AdminBundle/Resources/config/routing/JMP/category.yml"
+    prefix:   /jmp/category
+
+admin_jmp_job_type:
+    resource: "@AdminBundle/Resources/config/routing/JMP/jobtype.yml"
+    prefix:   /jmp/jobtype 
+    
+admin_jmp_job_status:
+    resource: "@AdminBundle/Resources/config/routing/JMP/jobstatus.yml"
+    prefix:   /jmp/jobstatus 
+    
+admin_jmp_salary_type:
+    resource: "@AdminBundle/Resources/config/routing/JMP/salarytype.yml"
+    prefix:   /jmp/salarytype 
+    
+admin_jmp_career_level:
+    resource: "@AdminBundle/Resources/config/routing/JMP/careerlevel.yml"
+    prefix:   /jmp/careerlevel 
+    
+admin_jmp_education_level:
+    resource: "@AdminBundle/Resources/config/routing/JMP/educationlevel.yml"
+    prefix:   /jmp/educationlevel    
+    
+admin_jmp_years_of_experience_level:
+    resource: "@AdminBundle/Resources/config/routing/JMP/yearsofexperience.yml"
+    prefix:   /jmp/yearsofexperience     
+    
 admin_homepage:
     path:     /
     defaults: { _controller: AdminBundle:Default:index }

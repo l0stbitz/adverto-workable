@@ -1,0 +1,19 @@
+admin_jmp_location_index:
+    path:     /
+    defaults: { _controller: "AdminBundle:JMP\\Location:index" }
+    methods:  GET
+
+admin_jmp_location_edit:
+    path:     /{id}/show
+    defaults: { _controller: "AdminBundle:JMP\\Location:edit" }
+    methods:  GET
+
+admin_jmp_location_new:
+    path:     /new
+    defaults: { _controller: "AdminBundle:JMP\\Location:new" }
+    methods:  [GET, POST]
+
+admin_jmp_location_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AdminBundle:JMP\\Location:delete" }
+    methods:  DELETE

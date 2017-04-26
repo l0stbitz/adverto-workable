@@ -13,16 +13,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 INSERT INTO `advj_business_unit` (`id`, `name`, `slug`, `user_modified`, `date_modified`, `position`, `active`) VALUES
-(1, 'The Fountain Group', 'the-fountain-group', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-20 21:10:14'), 0, 1);
+(1, 'The Fountain Group', 'the-fountain-group', 2, UNIX_TIMESTAMP('2017-01-20 21:10:14'), 0, 1);
 
 INSERT INTO `advj_career_area` (`id`, `name`, `slug`, `user_modified`, `date_modified`, `position`, `active`) VALUES
-(7, 'Administrative', 'administrative', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:33:08'), 7, 1),
-(9, 'Clinical', 'clinical', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:33:08'), 6, 1),
-(10, 'Engineering', 'engineering', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:30:55'), 5, 1),
-(11, 'IT', 'it', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:30:56'), 4, 1),
-(12, 'IT Support', 'itsupport', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:30:57'), 3, 1),
-(13, 'Professional', 'professional', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:30:58'), 2, 1),
-(14, 'Scientific', 'scientific', 2, UNIX_TIMESTAMP(UNIX_TIMESTAMP('2017-01-21 02:30:58'), 1, 1);
+(7, 'Administrative', 'administrative', 2, UNIX_TIMESTAMP('2017-01-21 02:33:08'), 7, 1),
+(9, 'Clinical', 'clinical', 2, UNIX_TIMESTAMP('2017-01-21 02:33:08'), 6, 1),
+(10, 'Engineering', 'engineering', 2, UNIX_TIMESTAMP('2017-01-21 02:30:55'), 5, 1),
+(11, 'IT', 'it', 2, UNIX_TIMESTAMP('2017-01-21 02:30:56'), 4, 1),
+(12, 'IT Support', 'itsupport', 2, UNIX_TIMESTAMP('2017-01-21 02:30:57'), 3, 1),
+(13, 'Professional', 'professional', 2, UNIX_TIMESTAMP('2017-01-21 02:30:58'), 2, 1),
+(14, 'Scientific', 'scientific', 2, UNIX_TIMESTAMP('2017-01-21 02:30:58'), 1, 1);
 
 INSERT INTO `advj_category` (`id`, `name`, `slug`, `user_modified`, `date_modified`, `position`, `active`) VALUES
 (1, 'Accounting & Finance', 'accountingandfinance', 1, UNIX_TIMESTAMP('2016-08-19 22:50:22'), 27, 1),

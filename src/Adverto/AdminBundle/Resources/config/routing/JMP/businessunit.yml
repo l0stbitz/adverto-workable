@@ -3,9 +3,9 @@ admin_jmp_business_unit_index:
     defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:index" }
     methods:  GET
 
-admin_jmp_business_unit_show:
+admin_jmp_business_unit_edit:
     path:     /{id}/show
-    defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:show" }
+    defaults: { _controller: "AdminBundle:JMP\\BusinessUnit:edit" }
     methods:  GET
 
 admin_jmp_business_unit_new:

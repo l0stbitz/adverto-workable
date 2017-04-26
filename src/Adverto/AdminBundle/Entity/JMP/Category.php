@@ -36,9 +36,9 @@ class Category {
     private $slug;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="user_modified", type="bigint", nullable=true)
+     * 
+     * @ORM\ManyToOne(targetEntity="\Adverto\AdminBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_modified", referencedColumnName="id")
      */
     private $userModified;
 
